@@ -18,8 +18,6 @@ import { McpCommand } from "./cli/cmd/mcp"
 import { GithubCommand } from "./cli/cmd/github"
 import { ExportCommand } from "./cli/cmd/export"
 import { ImportCommand } from "./cli/cmd/import"
-import { AttachCommand } from "./cli/cmd/attach"
-import { TuiThreadCommand } from "./cli/cmd/tui"
 import { AcpCommand } from "./cli/cmd/acp"
 import { EOL } from "os"
 import { WebCommand } from "./cli/cmd/web"
@@ -80,8 +78,6 @@ const cli = yargs(args)
   .completion("completion", "generate shell completion script")
   .command(AcpCommand)
   .command(McpCommand)
-  .command(TuiThreadCommand)
-  .command(AttachCommand)
   .command(RunCommand)
   .command(GenerateCommand)
   .command(DebugCommand)
@@ -101,8 +97,10 @@ const cli = yargs(args)
   .command(SessionCommand)
   .command(PluginCommand)
   .command(DbCommand)
+  .demandCommand(1, "Specify a command — see --help")
   .fail((msg, err) => {
     if (
+      msg?.startsWith("Specify a command") ||
       msg?.startsWith("Unknown argument") ||
       msg?.startsWith("Not enough non-option arguments") ||
       msg?.startsWith("Invalid values:")
