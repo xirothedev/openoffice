@@ -35,9 +35,29 @@ const body = <A, E, R>(value: Body<A, E, R>) => Effect.suspend(() => (typeof val
 
 type Runner = <A, E, R, E2>(value: Body<A, E, R | Scope.Scope>, layer: Layer.Layer<R, E2>) => Promise<A>
 
+// ponytail: host OPENCODE_CONFIG_DIR (e.g. orca shared hooks) leaks global config into tests; strip per-test.
+function withoutHostConfigDir<A, E, R>(effect: Effect.Effect<A, E, R>) {
+  return Effect.acquireUseRelease(
+    Effect.sync(() => {
+      const previous = process.env.OPENCODE_CONFIG_DIR
+      delete process.env.OPENCODE_CONFIG_DIR
+      return previous
+    }),
+    () => effect,
+    (previous) =>
+      Effect.sync(() => {
+        if (previous === undefined) {
+          delete process.env.OPENCODE_CONFIG_DIR
+          return
+        }
+        process.env.OPENCODE_CONFIG_DIR = previous
+      }),
+  )
+}
+
 const isolatedRun: Runner = (value, layer) =>
   Effect.gen(function* () {
-    const exit = yield* body(value).pipe(Effect.scoped, Effect.provide(layer), Effect.exit)
+    const exit = yield* withoutHostConfigDir(body(value)).pipe(Effect.scoped, Effect.provide(layer), Effect.exit)
     if (Exit.isFailure(exit)) {
       for (const err of Cause.prettyErrors(exit.cause)) {
         yield* Effect.logError(err)
@@ -54,7 +74,7 @@ const sharedRun: Runner = (value, layer) =>
   Effect.gen(function* () {
     const scope = yield* Scope.make()
     const ctx = yield* Layer.buildWithMemoMap(layer, memoMap, scope)
-    const exit = yield* body(value).pipe(Effect.scoped, Effect.provide(ctx), Effect.exit)
+    const exit = yield* withoutHostConfigDir(body(value)).pipe(Effect.scoped, Effect.provide(ctx), Effect.exit)
     yield* Scope.close(scope, Exit.void)
     if (Exit.isFailure(exit)) {
       for (const err of Cause.prettyErrors(exit.cause)) {
