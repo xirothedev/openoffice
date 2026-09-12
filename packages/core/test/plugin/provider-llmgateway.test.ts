@@ -16,7 +16,7 @@ const addPlugin = Effect.fn(function* () {
   const plugin = yield* PluginV2.Service
   const host = yield* PluginHost.make(plugin)
   const integration = yield* Integration.Service
-  yield* LLMGatewayPlugin.effect(host).pipe(Effect.provideService(Integration.Service, integration))
+  yield* LLMGatewayPlugin.effect(host.scoped("test")).pipe(Effect.provideService(Integration.Service, integration))
 })
 
 describe("LLMGatewayPlugin", () => {

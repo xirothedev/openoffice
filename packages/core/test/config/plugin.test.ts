@@ -27,7 +27,7 @@ describe("ConfigExternalPlugin", () => {
       const host = yield* PluginHost.make(plugins)
       const document = path.join(import.meta.dir, "opencode.json")
 
-      yield* ConfigExternalPlugin.Plugin.effect(host).pipe(
+      yield* ConfigExternalPlugin.Plugin.effect(host.scoped("test")).pipe(
         Effect.provideService(PluginV2.Service, plugins),
         Effect.provideService(FSUtil.Service, fs),
         Effect.provideService(Location.Service, location),
@@ -70,7 +70,7 @@ describe("ConfigExternalPlugin", () => {
       const npm = yield* Npm.Service
       const host = yield* PluginHost.make(plugins)
 
-      yield* ConfigExternalPlugin.Plugin.effect(host).pipe(
+      yield* ConfigExternalPlugin.Plugin.effect(host.scoped("test")).pipe(
         Effect.provideService(PluginV2.Service, plugins),
         Effect.provideService(FSUtil.Service, fs),
         Effect.provideService(Location.Service, location),
@@ -113,7 +113,7 @@ describe("ConfigExternalPlugin", () => {
       const npm = yield* Npm.Service
       const host = yield* PluginHost.make(plugins)
 
-      yield* ConfigExternalPlugin.Plugin.effect(host).pipe(
+      yield* ConfigExternalPlugin.Plugin.effect(host.scoped("test")).pipe(
         Effect.provideService(PluginV2.Service, plugins),
         Effect.provideService(FSUtil.Service, fs),
         Effect.provideService(Location.Service, location),
@@ -169,7 +169,7 @@ describe("ConfigExternalPlugin", () => {
         which: () => Effect.succeed(undefined),
       })
 
-      yield* ConfigExternalPlugin.Plugin.effect(host).pipe(
+      yield* ConfigExternalPlugin.Plugin.effect(host.scoped("test")).pipe(
         Effect.provideService(PluginV2.Service, plugins),
         Effect.provideService(FSUtil.Service, fs),
         Effect.provideService(Location.Service, location),
@@ -211,7 +211,7 @@ describe("ConfigExternalPlugin", () => {
       const npm = yield* Npm.Service
       const host = yield* PluginHost.make(plugins)
 
-      yield* ConfigExternalPlugin.Plugin.effect(host).pipe(
+      yield* ConfigExternalPlugin.Plugin.effect(host.scoped("test")).pipe(
         Effect.provideService(PluginV2.Service, plugins),
         Effect.provideService(FSUtil.Service, fs),
         Effect.provideService(Location.Service, location),

@@ -19,7 +19,7 @@ const addPlugin = Effect.fn(function* () {
   const aisdk = yield* AISDK.Service
   const host = yield* PluginHost.make(plugin)
   const integrations = yield* Integration.Service
-  yield* OpenAIPlugin.effect(host).pipe(Effect.provideService(Integration.Service, integrations))
+  yield* OpenAIPlugin.effect(host.scoped("test")).pipe(Effect.provideService(Integration.Service, integrations))
 })
 
 function required<T>(value: T | undefined): T {

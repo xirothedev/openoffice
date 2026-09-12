@@ -32,6 +32,8 @@ export function fromPromise(plugin: Plugin) {
           }))
 
         const run = (effect: Effect.Effect<void>) => Effect.runPromiseWith(context)(effect)
+        const runScoped = (effect: Effect.Effect<void, never, Scope.Scope>) =>
+          Effect.runPromiseWith(context)(Scope.provide(scope)(effect))
 
         const transform =
           <Draft>(domain: {
@@ -77,6 +79,10 @@ export function fromPromise(plugin: Plugin) {
             },
             remove: (id) => run(host.plugin.remove(id)),
           },
+          invoke: {
+            register: (name, handle) =>
+              register(host.invoke.register(name, (input) => Effect.promise(() => Promise.resolve(handle(input))))),
+          },
           reference: {
             transform: transform(host.reference),
             reload: () => run(host.reference.reload()),
@@ -84,6 +90,31 @@ export function fromPromise(plugin: Plugin) {
           skill: {
             transform: transform(host.skill),
             reload: () => run(host.skill.reload()),
+          },
+          tool: {
+            transform: (callback) =>
+              runScoped(
+                Effect.gen(function* () {
+                  const raws: unknown[] = []
+                  yield* Effect.promise(() =>
+                    Promise.resolve(
+                      callback({
+                        add: (tool: unknown) => void raws.push(tool),
+                      }),
+                    ),
+                  )
+                  yield* host.tool.transform((editor) => {
+                    for (const raw of raws) editor.add(raw)
+                  })
+                }),
+              ),
+            hook: (name, callback) =>
+              runScoped(
+                host.tool.hook(name, (event) => {
+                  const result = callback(event)
+                  return result instanceof Promise ? Effect.promise(() => result) : result
+                }),
+              ),
           },
         }
 

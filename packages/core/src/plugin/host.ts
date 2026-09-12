@@ -10,12 +10,21 @@ import { Credential } from "../credential"
 import { Integration } from "../integration"
 import { ModelV2 } from "../model"
 import { PluginV2 } from "../plugin"
+import { PluginInvoke } from "./invoke"
+import { PluginTool } from "./tool"
+import { Tools } from "../tool/tools"
 import { ProviderV2 } from "../provider"
 import { Reference } from "../reference"
 import type { DeepMutable } from "../schema"
 import { SkillV2 } from "../skill"
 
 const mutable = <T>(value: T) => value as DeepMutable<T>
+
+export interface HostAndStore {
+  readonly context: Omit<Interface, "invoke">
+  readonly invokes: PluginInvoke.Store
+  readonly scoped: (pluginID: string) => Interface
+}
 
 export const make = Effect.fn("PluginHost.make")(function* (plugin: PluginV2.Interface) {
   const agents = yield* AgentV2.Service
@@ -25,8 +34,10 @@ export const make = Effect.fn("PluginHost.make")(function* (plugin: PluginV2.Int
   const integration = yield* Integration.Service
   const reference = yield* Reference.Service
   const skill = yield* SkillV2.Service
+  const tools = yield* Tools.Service
+  const invokes = PluginInvoke.makeStore()
 
-  return {
+  const context = {
     options: {},
     agent: {
       reload: agents.reload,
@@ -215,5 +226,30 @@ export const make = Effect.fn("PluginHost.make")(function* (plugin: PluginV2.Int
           }),
         ),
     },
-  } satisfies Interface
+    tool: {
+      transform: (callback) =>
+        Effect.gen(function* () {
+          const collected: unknown[] = []
+          const result = callback({ add: (tool: unknown) => void collected.push(tool) })
+          if (Effect.isEffect(result)) yield* result
+          // ponytail: adapt throws RegistrationError like runtimeOf throws
+          // TypeError — a malformed tool is a programmer defect, not a failure.
+          // Name validation below is unreachable in practice, so orDie keeps
+          // the declared never-failure channel honest.
+          for (const raw of collected) {
+            const adapted = PluginTool.adapt(raw)
+            yield* tools.register({ [adapted.name]: adapted.tool }).pipe(Effect.orDie)
+          }
+        }),
+      hook: (name, callback) => tools.hook(name, callback),
+    },
+  } satisfies Omit<Interface, "invoke">
+
+  // ponytail: one shared host, but invoke names live per plugin for /api/plugin/:id/invoke routing
+  const scoped = (pluginID: string): Interface => ({
+    ...context,
+    invoke: { register: (name, handle) => invokes.register(pluginID, name, handle) },
+  })
+
+  return { context, invokes, scoped }
 })

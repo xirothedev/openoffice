@@ -31,7 +31,7 @@ describe("fromPromise", () => {
       })
 
       const adapted = PluginPromise.fromPromise(promisePlugin)
-      yield* adapted.effect({ ...host, options: { mode: "strict" } })
+      yield* adapted.effect({ ...host.scoped("test"), options: { mode: "strict" } })
 
       expect(yield* agents.get(AgentV2.ID.make("reviewer"))).toMatchObject({
         description: "Reviews code",
@@ -59,7 +59,7 @@ describe("fromPromise", () => {
       })
 
       const adapted = PluginPromise.fromPromise(promisePlugin)
-      yield* adapted.effect(host)
+      yield* adapted.effect(host.scoped("test"))
 
       expect(yield* agents.get(AgentV2.ID.make("temp"))).toBeUndefined()
     }),

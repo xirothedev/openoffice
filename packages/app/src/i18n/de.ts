@@ -224,6 +224,7 @@ export const dict = {
   "common.goForward": "Vorwärts navigieren",
   "common.loading": "Wird geladen",
   "common.loading.ellipsis": "…",
+  "titlebar.debugTools.toggle": "Debug-Tools umschalten",
   "common.cancel": "Abbrechen",
   "common.clear": "Leeren",
   "common.connect": "Verbinden",
@@ -291,6 +292,7 @@ export const dict = {
   "prompt.action.stop": "Stoppen",
   "prompt.toast.pasteUnsupported.title": "Nicht unterstützter Anhang",
   "prompt.toast.attachmentDuplicate.title": "Diese Datei wurde bereits hochgeladen",
+  "prompt.toast.attachmentTooLarge.title": "Diese Datei ist größer als das Anhangslimit von 10 MiB",
   "prompt.toast.pasteUnsupported.description": "Hier können nur Bilder, PDFs oder Textdateien angehängt werden.",
   "prompt.toast.modelAgentRequired.title": "Wählen Sie einen Agenten und ein Modell",
   "prompt.toast.modelAgentRequired.description":
@@ -591,6 +593,8 @@ export const dict = {
   "session.tab.context": "Kontext",
   "session.tab.unknown": "Unbekannte Sitzung",
   "session.panel.reviewAndFiles": "Überprüfung und Dateien",
+  "session.attachment.openInApp": "In App öffnen",
+  "session.attachment.download": "Herunterladen",
   "session.error.notFound": "Diese Sitzung wurde nicht gefunden",
   "session.error.notFound.description":
     "Dieser Tab verweist auf eine Sitzung, die auf diesem Server nicht mehr existiert.",

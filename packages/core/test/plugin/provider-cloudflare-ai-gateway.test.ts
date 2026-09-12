@@ -15,7 +15,7 @@ const addPlugin = Effect.fn(function* () {
   const plugin = yield* PluginV2.Service
   const aisdk = yield* AISDK.Service
   const host = yield* PluginHost.make(plugin)
-  yield* CloudflareAIGatewayPlugin.effect(host)
+  yield* CloudflareAIGatewayPlugin.effect(host.scoped("test"))
 })
 
 function withEnv<A, E, R>(vars: Record<string, string | undefined>, fx: () => Effect.Effect<A, E, R>) {

@@ -17,7 +17,7 @@ const addPlugin = Effect.fn(function* () {
   const plugin = yield* PluginV2.Service
   const aisdk = yield* AISDK.Service
   const host = yield* PluginHost.make(plugin)
-  yield* GatewayPlugin.effect(host)
+  yield* GatewayPlugin.effect(host.scoped("test"))
 })
 
 mock.module("@ai-sdk/gateway", () => ({

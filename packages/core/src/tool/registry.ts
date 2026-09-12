@@ -1,6 +1,6 @@
 export * as ToolRegistry from "./registry"
 
-import { ToolOutput, type ToolCall, type ToolDefinition, type ToolResultValue } from "@opencode-ai/llm"
+import { ToolOutput, ToolFailure, type ToolCall, type ToolDefinition, type ToolResultValue } from "@opencode-ai/llm"
 import { Context, Effect, Layer, Scope } from "effect"
 import { AgentV2 } from "../agent"
 import { PermissionV2 } from "../permission"
@@ -9,7 +9,15 @@ import { SessionSchema } from "../session/schema"
 import { ToolOutputStore } from "../tool-output-store"
 import { Wildcard } from "../util/wildcard"
 import { ApplicationTools } from "./application-tools"
-import { definition, permission, settle, validateName, type AnyTool, type RegistrationError } from "./tool"
+import {
+  definition,
+  denialMessage,
+  permission,
+  settle,
+  validateName,
+  type AnyTool,
+  type RegistrationError,
+} from "./tool"
 import { Tools } from "./tools"
 import { makeLocationNode } from "../effect/app-node"
 
@@ -24,6 +32,10 @@ export interface Interface {
   readonly materialize: (permissions?: PermissionV2.Ruleset) => Effect.Effect<Materialization>
   /** Internal registration capability exposed publicly only through Tools.Service. */
   readonly register: (tools: Readonly<Record<string, AnyTool>>) => Effect.Effect<void, RegistrationError, Scope.Scope>
+  readonly hook: (
+    name: "execute.before",
+    callback: (event: Tools.BeforeExecuteEvent) => Effect.Effect<void> | void,
+  ) => Effect.Effect<void, never, Scope.Scope>
 }
 
 export interface Materialization {
@@ -46,6 +58,28 @@ const registryLayer = Layer.effect(
     const resources = yield* ToolOutputStore.Service
     type Registration = { readonly identity: object; readonly tool: AnyTool }
     const local = new Map<string, Array<{ readonly token: object; readonly registration: Registration }>>()
+    // ponytail: guards run in registration order before every settlement (both
+    // direct and materialized paths funnel through settleWith); only denials
+    // become error results, everything else stays loud.
+    const beforeHooks: Array<(event: Tools.BeforeExecuteEvent) => Effect.Effect<void> | void> = []
+
+    const runBeforeHooks = Effect.fn("ToolRegistry.beforeHooks")(function* (event: Tools.BeforeExecuteEvent) {
+      for (const hook of [...beforeHooks]) {
+        yield* runHook(hook, event)
+      }
+    })
+
+    // ponytail: guards run once per settlement, before lookup, so they also
+    // see calls to unknown tools. Only denials become error results.
+    const checkGuards = (event: Tools.BeforeExecuteEvent) =>
+      runBeforeHooks(event).pipe(
+        Effect.map(() => undefined as Settlement | undefined),
+        Effect.catch((error: unknown) => {
+          const message = denialMessage(error)
+          if (message === undefined) return Effect.die(error)
+          return Effect.succeed({ result: { type: "error" as const, value: message } })
+        }),
+      )
 
     const settleWith = Effect.fn("ToolRegistry.settle")(function* (input: ExecuteInput, advertised?: object) {
       const registration =
@@ -82,6 +116,19 @@ const registryLayer = Layer.effect(
     })
 
     return Service.of({
+      hook: (name, callback) => {
+        if (name !== "execute.before") return Effect.die(`Unknown tool hook: ${name}`)
+        return Effect.acquireRelease(
+          Effect.sync(() => {
+            beforeHooks.push(callback)
+          }),
+          () =>
+            Effect.sync(() => {
+              const index = beforeHooks.indexOf(callback)
+              if (index !== -1) beforeHooks.splice(index, 1)
+            }),
+        )
+      },
       register: Effect.fn("ToolRegistry.register")(function* (tools) {
         const entries = Object.entries(tools)
         if (entries.length === 0) return
@@ -113,11 +160,15 @@ const registryLayer = Layer.effect(
           if (whollyDisabled(permission(registration.tool, name), permissions)) registrations.delete(name)
         return {
           definitions: Array.from(registrations, ([name, registration]) => definition(name, registration.tool)),
-          settle: (input) => {
-            const registration = registrations.get(input.call.name)
-            if (registration) return settleWith(input, registration.identity)
-            return Effect.succeed({ result: { type: "error", value: `Unknown tool: ${input.call.name}` } })
-          },
+          settle: (input) =>
+            checkGuards({ tool: input.call.name, input: input.call.input }).pipe(
+              Effect.flatMap((denied) => {
+                if (denied !== undefined) return Effect.succeed(denied)
+                const registration = registrations.get(input.call.name)
+                if (registration) return settleWith(input, registration.identity)
+                return Effect.succeed({ result: { type: "error", value: `Unknown tool: ${input.call.name}` } })
+              }),
+            ),
         }
       }),
     })
@@ -126,8 +177,21 @@ const registryLayer = Layer.effect(
 
 const layer = Layer.effect(
   Tools.Service,
-  Service.use((registry) => Effect.succeed(Tools.Service.of({ register: registry.register }))),
+  Service.use((registry) => Effect.succeed(Tools.Service.of({ register: registry.register, hook: registry.hook }))),
 ).pipe(Layer.provideMerge(registryLayer))
+
+function runHook(
+  hook: (event: Tools.BeforeExecuteEvent) => Effect.Effect<void> | void,
+  event: Tools.BeforeExecuteEvent,
+): Effect.Effect<void, ToolFailure> {
+  try {
+    const result = hook(event)
+    return Effect.isEffect(result) ? (result as Effect.Effect<void, ToolFailure>) : Effect.void
+  } catch (error) {
+    const message = denialMessage(error)
+    return message === undefined ? Effect.die(error) : Effect.fail(new ToolFailure({ message }))
+  }
+}
 
 function whollyDisabled(action: string, rules: PermissionV2.Ruleset) {
   const rule = rules.findLast((rule) => Wildcard.match(action, rule.action))

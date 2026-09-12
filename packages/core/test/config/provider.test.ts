@@ -16,7 +16,7 @@ const it = testEffect(PluginTestLayer)
 const addPlugin = Effect.fn(function* (config: Config.Interface) {
   const plugin = yield* PluginV2.Service
   const host = yield* PluginHost.make(plugin)
-  yield* ConfigProviderPlugin.Plugin.effect(host).pipe(Effect.provideService(Config.Service, config))
+  yield* ConfigProviderPlugin.Plugin.effect(host.scoped("test")).pipe(Effect.provideService(Config.Service, config))
 })
 
 function required<T>(value: T | undefined): T {

@@ -1264,4 +1264,9 @@ export const dict = {
   "settings.general.row.pinchZoom.description": "Tillat knipebevegelser på styreflaten og Ctrl-rulling for å zoome",
   "settings.updates.action.downloading": "Laster ned...",
   "settings.updates.action.installing": "Installerer...",
+
+  "titlebar.debugTools.toggle": "Veksle feilsøkingsverktøy",
+  "prompt.toast.attachmentTooLarge.title": "Denne filen er større enn vedleggsgrensen på 10 MiB",
+  "session.attachment.openInApp": "Åpne i appen",
+  "session.attachment.download": "Last ned",
 } satisfies Partial<Record<Keys, string>>
