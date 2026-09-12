@@ -1,5 +1,8 @@
 export * as ConfigOpenOffice from "./openoffice"
 
+// ponytail: single pin for the bundled office plugin; bump with plugin releases.
+export const officePluginSpec = "@xirothedev/openoffice-plugin-opencode@0.2.1"
+
 export interface OrgPreset {
   model?: string
   keyRef?: string
