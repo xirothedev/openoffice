@@ -29,6 +29,7 @@ import { ConfigPluginV1 } from "@opencode-ai/core/v1/config/plugin"
 import { ConfigAgent } from "./agent"
 import { ConfigCommand } from "./command"
 import { ConfigManaged } from "./managed"
+import { ConfigOpenOffice } from "./openoffice"
 import { ConfigParse } from "./parse"
 import { ConfigPaths } from "./paths"
 import { ConfigPlugin } from "./plugin"
@@ -264,9 +265,12 @@ const layer = Layer.effect(
       if (!Flag.OPENCODE_CONFIG && !Flag.OPENCODE_CONFIG_DIR && !Flag.OPENCODE_CONFIG_CONTENT) {
         const file = globalConfigFile()
         if (!existsSync(file)) {
-          yield* fs
-            .writeWithDirs(file, JSON.stringify({ $schema: "https://opencode.ai/config.json" }, null, 2))
-            .pipe(Effect.catch(() => Effect.void))
+          // ponytail: fresh installs ship the office plugin; removal is user-owned, the file is only seeded once.
+          const seed = {
+            $schema: "https://opencode.ai/config.json",
+            plugins: [ConfigOpenOffice.officePluginSpec],
+          }
+          yield* fs.writeWithDirs(file, JSON.stringify(seed, null, 2)).pipe(Effect.catch(() => Effect.void))
         }
       }
       result = mergeConfig(result, yield* loadFile(path.join(Global.Path.config, "config.json"), env))
