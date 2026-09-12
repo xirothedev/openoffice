@@ -13,6 +13,7 @@ import { Integration } from "./integration"
 import { KeyedMutex } from "./effect/keyed-mutex"
 import { PluginHost } from "./plugin/host"
 import { PluginInvoke } from "./plugin/invoke"
+import { ToolRegistry } from "./tool/registry"
 import { Reference } from "./reference"
 import { SkillV2 } from "./skill"
 import { State } from "./state"
@@ -169,5 +170,6 @@ export const node = makeLocationNode({
     Integration.node,
     Reference.node,
     SkillV2.node,
+    ToolRegistry.toolsNode,
   ],
 })

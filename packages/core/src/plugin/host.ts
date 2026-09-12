@@ -11,6 +11,8 @@ import { Integration } from "../integration"
 import { ModelV2 } from "../model"
 import { PluginV2 } from "../plugin"
 import { PluginInvoke } from "./invoke"
+import { PluginTool } from "./tool"
+import { Tools } from "../tool/tools"
 import { ProviderV2 } from "../provider"
 import { Reference } from "../reference"
 import type { DeepMutable } from "../schema"
@@ -32,6 +34,7 @@ export const make = Effect.fn("PluginHost.make")(function* (plugin: PluginV2.Int
   const integration = yield* Integration.Service
   const reference = yield* Reference.Service
   const skill = yield* SkillV2.Service
+  const tools = yield* Tools.Service
   const invokes = PluginInvoke.makeStore()
 
   const context = {
@@ -222,6 +225,23 @@ export const make = Effect.fn("PluginHost.make")(function* (plugin: PluginV2.Int
             list: draft.list,
           }),
         ),
+    },
+    tool: {
+      transform: (callback) =>
+        Effect.gen(function* () {
+          const collected: unknown[] = []
+          const result = callback({ add: (tool: unknown) => void collected.push(tool) })
+          if (Effect.isEffect(result)) yield* result
+          // ponytail: adapt throws RegistrationError like runtimeOf throws
+          // TypeError — a malformed tool is a programmer defect, not a failure.
+          // Name validation below is unreachable in practice, so orDie keeps
+          // the declared never-failure channel honest.
+          for (const raw of collected) {
+            const adapted = PluginTool.adapt(raw)
+            yield* tools.register({ [adapted.name]: adapted.tool }).pipe(Effect.orDie)
+          }
+        }),
+      hook: (name, callback) => tools.hook(name, callback),
     },
   } satisfies Omit<Interface, "invoke">
 
