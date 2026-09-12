@@ -11,3 +11,4 @@ export type { IntegrationDraft, IntegrationHooks, IntegrationMethodRegistration 
 export type { InvokeHooks } from "./invoke.js"
 export type { ReferenceDraft, ReferenceHooks } from "./reference.js"
 export type { SkillDraft, SkillHooks } from "./skill.js"
+export type { BeforeExecuteEvent, ToolEditor, ToolHooks } from "./tool.js"

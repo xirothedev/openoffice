@@ -136,6 +136,17 @@ export const validateName = (name: string) =>
     ? Effect.void
     : Effect.fail(new RegistrationError({ name, message: `Invalid tool name: ${name}` }))
 
+// Foreign denial errors (plugin tools report them as `Tool.Error`) carry a
+// deny message; anything else is a bug or foreign failure the caller cannot
+// interpret, so it stays loud instead of silently allowing the call.
+export function denialMessage(error: unknown): string | undefined {
+  if (typeof error !== "object" || error === null) return undefined
+  const tag = (error as { readonly _tag?: unknown })._tag
+  if (tag !== "Tool.Error" && tag !== "LLM.ToolFailure") return undefined
+  const message = (error as { readonly message?: unknown }).message
+  return typeof message === "string" ? message : "Tool denied"
+}
+
 export const withPermission = <Input extends SchemaType<any>, Output extends SchemaType<any>>(
   tool: Definition<Input, Output>,
   permission: string,
