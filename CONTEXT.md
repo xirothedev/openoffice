@@ -223,3 +223,31 @@ Before stabilizing the client API:
 ## Flagged ambiguities
 
 - Legacy `experimental.chat.system.transform` can mutate the assembled baseline system prompt arbitrarily, but V2 plugins do not yet expose an equivalent hook. Decide separately whether to port it, replace dynamic uses with plugin-defined **Context Sources**, or narrow its semantics.
+
+## OpenOffice product
+
+Company office staff use OpenOffice desktop with org-pushed presets and safe draft/accept office editing.
+
+**Office Staff**:
+A non-technical company user who reads and edits office files.
+_Avoid_: officer, non-dev
+
+**Device**:
+One staff laptop install identified by `deviceID` plus `userID`.
+_Avoid_: machine
+
+**Org Preset**:
+Cloud config pushed to a **Device** (model, key reference, folders, updates).
+_Avoid_: config
+
+**Policy**:
+The **Org Preset** fields staff cannot change.
+_Avoid_: rules
+
+**Managed Preview**:
+The in-app office file tab backed by the plugin, with builtin fallback.
+_Avoid_: preview
+
+**Draft/Accept**:
+Plugin edits staged in `drafts/` with the real file written only on accept.
+_Avoid_: edit
