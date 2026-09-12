@@ -17,7 +17,7 @@ const addPlugin = Effect.fn(function* () {
   const plugin = yield* PluginV2.Service
   const aisdk = yield* AISDK.Service
   const host = yield* PluginHost.make(plugin)
-  yield* CoherePlugin.effect(host)
+  yield* CoherePlugin.effect(host.scoped("test"))
 })
 
 function fakeSelectorSdk(calls: string[]) {

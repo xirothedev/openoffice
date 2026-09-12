@@ -14,7 +14,7 @@ const it = testEffect(PluginTestLayer)
 const addPlugin = Effect.fn(function* () {
   const plugin = yield* PluginV2.Service
   const host = yield* PluginHost.make(plugin)
-  yield* NvidiaPlugin.effect(host)
+  yield* NvidiaPlugin.effect(host.scoped("test"))
 })
 
 describe("NvidiaPlugin", () => {

@@ -77,6 +77,10 @@ export function fromPromise(plugin: Plugin) {
             },
             remove: (id) => run(host.plugin.remove(id)),
           },
+          invoke: {
+            register: (name, handle) =>
+              register(host.invoke.register(name, (input) => Effect.promise(() => Promise.resolve(handle(input))))),
+          },
           reference: {
             transform: transform(host.reference),
             reload: () => run(host.reference.reload()),

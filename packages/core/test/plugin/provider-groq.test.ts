@@ -16,7 +16,7 @@ const addPlugin = Effect.fn(function* () {
   const plugin = yield* PluginV2.Service
   const aisdk = yield* AISDK.Service
   const host = yield* PluginHost.make(plugin)
-  yield* GroqPlugin.effect(host)
+  yield* GroqPlugin.effect(host.scoped("test"))
 })
 
 describe("GroqPlugin", () => {

@@ -14,7 +14,7 @@ const it = testEffect(PluginTestLayer)
 const addPlugin = Effect.fn(function* () {
   const plugin = yield* PluginV2.Service
   const host = yield* PluginHost.make(plugin)
-  yield* KiloPlugin.effect(host)
+  yield* KiloPlugin.effect(host.scoped("test"))
 })
 
 describe("KiloPlugin", () => {

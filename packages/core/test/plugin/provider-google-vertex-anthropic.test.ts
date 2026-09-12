@@ -17,7 +17,7 @@ const addPlugin = Effect.fn(function* (definition: typeof GoogleVertexAnthropicP
   const plugin = yield* PluginV2.Service
   const aisdk = yield* AISDK.Service
   const host = yield* PluginHost.make(plugin)
-  yield* definition.effect(host)
+  yield* definition.effect(host.scoped("test"))
 })
 
 function withEnv<A, E, R>(vars: Record<string, string | undefined>, effect: () => Effect.Effect<A, E, R>) {

@@ -22,7 +22,7 @@ const addPlugin = Effect.fn(function* () {
   const plugin = yield* PluginV2.Service
   const aisdk = yield* AISDK.Service
   const host = yield* PluginHost.make(plugin)
-  yield* SapAICorePlugin.effect(host).pipe(Effect.provideService(Npm.Service, npm))
+  yield* SapAICorePlugin.effect(host.scoped("test")).pipe(Effect.provideService(Npm.Service, npm))
 })
 
 function withEnv<A, E, R>(vars: Record<string, string | undefined>, effect: () => Effect.Effect<A, E, R>) {

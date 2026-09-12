@@ -17,7 +17,7 @@ const addPlugin = Effect.fn(function* () {
   const plugin = yield* PluginV2.Service
   const aisdk = yield* AISDK.Service
   const host = yield* PluginHost.make(plugin)
-  yield* DeepInfraPlugin.effect(host)
+  yield* DeepInfraPlugin.effect(host.scoped("test"))
 })
 
 void mock.module("@ai-sdk/deepinfra", () => ({

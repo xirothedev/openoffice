@@ -17,7 +17,7 @@ const addPlugin = Effect.fn(function* () {
   const plugin = yield* PluginV2.Service
   const aisdk = yield* AISDK.Service
   const host = yield* PluginHost.make(plugin)
-  yield* CloudflareWorkersAIPlugin.effect(host)
+  yield* CloudflareWorkersAIPlugin.effect(host.scoped("test"))
 })
 
 function required<T>(value: T | undefined): T {

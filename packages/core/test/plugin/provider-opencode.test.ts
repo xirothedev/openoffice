@@ -21,7 +21,7 @@ const addPlugin = Effect.fn(function* (http?: HttpClient.HttpClient) {
   const events = yield* EventV2.Service
   const integration = yield* Integration.Service
   const client = yield* HttpClient.HttpClient
-  yield* OpencodePlugin.effect(host).pipe(
+  yield* OpencodePlugin.effect(host.scoped("test")).pipe(
     Effect.provideService(EventV2.Service, events),
     Effect.provideService(Integration.Service, integration),
     Effect.provideService(HttpClient.HttpClient, http ?? client),

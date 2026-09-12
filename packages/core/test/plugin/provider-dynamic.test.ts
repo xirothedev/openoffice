@@ -31,7 +31,7 @@ function npmEntrypoint(entrypoint?: string) {
 const addPlugin = Effect.fn(function* (npm?: Npm.Interface) {
   const plugin = yield* PluginV2.Service
   const host = yield* PluginHost.make(plugin)
-  yield* DynamicProviderPlugin.effect(host).pipe(Effect.provideService(Npm.Service, npm ?? (yield* Npm.Service)))
+  yield* DynamicProviderPlugin.effect(host.scoped("test")).pipe(Effect.provideService(Npm.Service, npm ?? (yield* Npm.Service)))
 })
 
 function tempEntrypoint(source: string) {

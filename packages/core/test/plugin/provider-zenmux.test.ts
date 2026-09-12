@@ -14,7 +14,7 @@ const it = testEffect(PluginTestLayer)
 const addPlugin = Effect.fn(function* () {
   const plugin = yield* PluginV2.Service
   const host = yield* PluginHost.make(plugin)
-  yield* ZenmuxPlugin.effect(host)
+  yield* ZenmuxPlugin.effect(host.scoped("test"))
 })
 
 function required<T>(value: T | undefined): T {

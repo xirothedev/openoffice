@@ -12,6 +12,7 @@ import { EventV2 } from "./event"
 import { Integration } from "./integration"
 import { KeyedMutex } from "./effect/keyed-mutex"
 import { PluginHost } from "./plugin/host"
+import { PluginInvoke } from "./plugin/invoke"
 import { Reference } from "./reference"
 import { SkillV2 } from "./skill"
 import { State } from "./state"
@@ -24,6 +25,7 @@ export interface Interface {
   readonly add: (id: ID, effect: PluginRuntime["effect"]) => Effect.Effect<void>
   readonly remove: (id: ID) => Effect.Effect<void>
   readonly wait: (id: ID) => Effect.Effect<void>
+  readonly invoke: Pick<PluginInvoke.Store, "list" | "call">
 }
 
 export class Service extends Context.Service<Service, Interface>()("@opencode/v2/Plugin") {}
@@ -38,7 +40,7 @@ const layer = Layer.effect(
     const loading = new Set<ID>()
     const waiters = new Map<ID, Set<Deferred.Deferred<void>>>()
     const failures = new Map<ID, Exit.Exit<void, never>>()
-    let host: Parameters<PluginRuntime["effect"]>[0]
+    let host: PluginHost.HostAndStore
 
     const add = Effect.fn("Plugin.add")(function* (id: ID, effect: PluginRuntime["effect"]) {
       if (loading.has(id)) return yield* Effect.die(`Plugin load cycle detected for ${id}`)
@@ -56,7 +58,7 @@ const layer = Layer.effect(
                 if (existing) yield* Scope.close(existing, Exit.void).pipe(Effect.ignore)
 
                 const child = yield* Scope.fork(scope)
-                yield* effect(host).pipe(
+                yield* effect(host.scoped(String(id))).pipe(
                   Scope.provide(child),
                   Effect.withSpan("Plugin.load", { attributes: { "plugin.id": id } }),
                   Effect.onExit((exit) => (Exit.isFailure(exit) ? Scope.close(child, exit) : Effect.void)),
@@ -136,6 +138,10 @@ const layer = Layer.effect(
       add,
       remove,
       wait,
+      invoke: {
+        list: () => host.invokes.list(),
+        call: (pluginID, name, input) => host.invokes.call(pluginID, name, input),
+      },
     })
     host = yield* PluginHost.make(service)
     return service

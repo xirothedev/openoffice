@@ -16,7 +16,7 @@ const addPlugin = Effect.fn(function* () {
   const plugin = yield* PluginV2.Service
   const aisdk = yield* AISDK.Service
   const host = yield* PluginHost.make(plugin)
-  yield* VercelPlugin.effect(host)
+  yield* VercelPlugin.effect(host.scoped("test"))
 })
 
 describe("VercelPlugin", () => {
