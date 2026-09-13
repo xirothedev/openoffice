@@ -39,11 +39,14 @@ const decodeFrontmatter = Schema.decodeUnknownOption(Frontmatter)
 
 export type Data = {
   sources: Types.DeepMutable<Source>[]
+  // ponytail: org-closed skill list from the console preset; undefined means open.
+  allowlist: readonly string[] | undefined
 }
 
 export type Draft = {
   source: (source: Source) => void
   list: () => readonly Source[]
+  allowlist: (names: readonly string[] | undefined) => void
 }
 
 export interface Interface extends State.Transformable<Draft> {
@@ -60,13 +63,16 @@ const layer = Layer.effect(
     const fs = yield* FSUtil.Service
 
     const state = State.create<Data, Draft>({
-      initial: () => ({ sources: [] }),
+      initial: () => ({ sources: [], allowlist: undefined }),
       draft: (draft) => ({
         source: (source) => {
           if (draft.sources.some((item) => Source.equals(item, source))) return
           draft.sources.push(source as Types.DeepMutable<Source>)
         },
         list: () => draft.sources as Source[],
+        allowlist: (names) => {
+          draft.allowlist = names
+        },
       }),
     })
 
@@ -109,13 +115,17 @@ const layer = Layer.effect(
     const cache = new Map<string, Info[]>()
     const list = Effect.fn("SkillV2.list")(function* () {
       const skills = new Map<string, Info>()
-      for (const source of state.get().sources) {
+      const data = state.get()
+      for (const source of data.sources) {
         const key = Source.key(source)
         const loaded = cache.get(key) ?? (yield* load(source))
         cache.set(key, loaded)
         for (const skill of loaded) skills.set(skill.name, skill)
       }
-      return Array.from(skills.values())
+      const all = Array.from(skills.values())
+      if (data.allowlist === undefined) return all
+      const permitted = new Set(data.allowlist)
+      return all.filter((skill) => permitted.has(skill.name))
     })
 
     return Service.of({

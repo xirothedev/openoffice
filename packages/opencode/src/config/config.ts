@@ -19,7 +19,8 @@ import type { ConsoleState } from "@opencode-ai/core/v1/config/console-state"
 import { FSUtil } from "@opencode-ai/core/fs-util"
 import { InstanceState } from "@/effect/instance-state"
 import { Context, Duration, Effect, Exit, Fiber, Layer, Option, Schema } from "effect"
-import { FetchHttpClient, HttpClient, HttpClientRequest } from "effect/unstable/http"
+import { FetchHttpClient, HttpClient, HttpClientRequest, HttpClientResponse } from "effect/unstable/http"
+import { randomUUID } from "node:crypto"
 import { EffectFlock } from "@opencode-ai/core/util/effect-flock"
 import { containsPath, type InstanceContext } from "../project/instance-context"
 import { ConfigV1 } from "@opencode-ai/core/v1/config/config"
@@ -137,6 +138,20 @@ export interface Interface {
 export class Service extends Context.Service<Service, Interface>()("@opencode/Config") {}
 
 export const use = serviceUse(Service)
+
+async function readOrCreateDeviceID(): Promise<string> {
+  // ponytail: one stable opaque ID per install, plain file next to global config.
+  const file = path.join(Global.Path.config, "device_id")
+  const existing = await fsNode.readFile(file, "utf8").then(
+    (text) => text.trim(),
+    () => "",
+  )
+  if (existing) return existing.slice(0, 64)
+  const created = randomUUID()
+  await fsNode.mkdir(Global.Path.config, { recursive: true })
+  await fsNode.writeFile(file, created + "\n")
+  return created
+}
 
 function globalConfigFile() {
   const candidates = ["opencode.jsonc", "opencode.json", "config.json"].map((file) =>
@@ -371,6 +386,21 @@ const layer = Layer.effect(
           return mergePluginOrigins(source, next.plugin, kind)
         }
 
+        const sendHeartbeat = Effect.fnUntraced(function* (server: string, token: string) {
+          const deviceID = yield* Effect.promise(() => readOrCreateDeviceID())
+          const request = yield* HttpClientRequest.post(`${server}/api/heartbeat`).pipe(
+            HttpClientRequest.acceptJson,
+            HttpClientRequest.bearerToken(token),
+            HttpClientRequest.schemaBodyJson(Schema.Struct({ device_id: Schema.String, app_version: Schema.String }))({
+              device_id: deviceID,
+              app_version: InstallationVersion,
+            }),
+          )
+          yield* http
+            .execute(request)
+            .pipe(Effect.flatMap(HttpClientResponse.filterStatusOk), Effect.asVoid, Effect.timeout("15 seconds"))
+        })
+
         for (const [key, value] of Object.entries(auth)) {
           if (value.type === "wellknown") {
             const url = key.replace(/\/+$/, "")
@@ -520,6 +550,11 @@ const layer = Layer.effect(
                 consoleManagedProviders.add(providerID)
               }
               yield* merge(source, next, "global")
+            }
+            if (Option.isSome(tokenOpt)) {
+              yield* sendHeartbeat(url, tokenOpt.value).pipe(
+                Effect.catchCause((cause) => Effect.logDebug("device heartbeat skipped", { error: String(cause) })),
+              )
             }
           }).pipe(
             Effect.withSpan("Config.loadActiveOrgConfig"),

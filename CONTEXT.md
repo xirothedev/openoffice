@@ -237,8 +237,12 @@ One staff laptop install identified by `deviceID` plus `userID`.
 _Avoid_: machine
 
 **Org Preset**:
-Cloud config pushed to a **Device** (model, key reference, folders, updates).
+Cloud config pushed to a **Device** (model, key reference, folders, updates, managed capabilities).
 _Avoid_: config
+
+**Managed Capability**:
+Pinned plugins plus enabled skills and remote MCP servers from the **Org Preset** with no staff edits.
+_Avoid_: extension, integration
 
 **Policy**:
 The **Org Preset** fields staff cannot change.
