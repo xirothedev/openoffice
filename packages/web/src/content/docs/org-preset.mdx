@@ -1,0 +1,45 @@
+---
+title: Org presets
+description: Push locked config to staff devices from the cloud.
+---
+
+An **Org preset** is cloud config pushed to staff devices. It lets an admin
+manage models, plugins, skills, and MCP servers centrally so non-technical
+staff never have to configure anything themselves.
+
+Staff keep their own theme, language, and templates. Everything in the preset
+is locked: preset values always win over staff settings.
+
+---
+
+## What the preset holds
+
+| Field                  | Effect                                                      |
+| ---------------------- | ----------------------------------------------------------- |
+| `model`                | Default model for staff devices                             |
+| `keyRef`               | Key reference staff devices use                             |
+| `allowedFolders`       | Folders staff may work in                                   |
+| `autoUpdate`           | Whether staff clients auto-update                           |
+| `capabilities.plugins` | Pinned plugin specs, one per line                           |
+| `capabilities.skills`  | Skills allowlist; when set, ONLY these skills are available |
+| `capabilities.mcp`     | Remote MCP servers as `name=url` lines                      |
+
+An empty preset means open: staff devices use local config.
+
+---
+
+## Manage
+
+Admins edit the preset in the console: open the workspace, go to
+**Settings**, and use the **Org preset** section. Only admins can change it.
+
+Devices pick up the preset when a session starts. If a device is offline it
+keeps working with its last synced config.
+
+---
+
+## Monitor
+
+The workspace **Members** page shows per-staff monthly usage plus last-active
+dates reported by each device heartbeat, so admins can see who is set up and
+using the preset.

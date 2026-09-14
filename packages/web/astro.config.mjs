@@ -177,6 +177,7 @@ export default defineConfig({
         "providers",
         "network",
         "enterprise",
+        "org-preset",
         "troubleshooting",
         {
           label: "Windows",
