@@ -22,12 +22,31 @@ describe("resolveEffectiveConfig", () => {
     expect(effective.autoUpdate).toBe(false)
   })
 
+  test("preset-closed capabilities win wholesale with no staff override", () => {
+    const effective = resolveEffectiveConfig(
+      {
+        capabilities: {
+          plugins: ["@xirothedev/openoffice-plugin-opencode@0.2.1"],
+          skills: ["office-review"],
+          mcp: { docs: { url: "https://mcp.internal/docs" } },
+        },
+      },
+      {},
+    )
+    expect(effective.capabilities).toEqual({
+      plugins: ["@xirothedev/openoffice-plugin-opencode@0.2.1"],
+      skills: ["office-review"],
+      mcp: { docs: { url: "https://mcp.internal/docs" } },
+    })
+  })
+
   test("empty preset and local yields empty effective config", () => {
     expect(resolveEffectiveConfig({}, {})).toEqual({
       model: undefined,
       keyRef: undefined,
       allowedFolders: undefined,
       autoUpdate: undefined,
+      capabilities: undefined,
       theme: undefined,
       language: undefined,
       templates: undefined,
@@ -42,6 +61,7 @@ describe("lockedKeys", () => {
       "keyRef",
       "autoUpdate",
     ])
+    expect(lockedKeys({ capabilities: { skills: ["office-review"] } })).toEqual(["capabilities"])
     expect(lockedKeys({})).toEqual([])
   })
 })

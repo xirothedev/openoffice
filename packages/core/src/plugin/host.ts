@@ -223,6 +223,7 @@ export const make = Effect.fn("PluginHost.make")(function* (plugin: PluginV2.Int
           callback({
             source: (source) => draft.source(Schema.decodeUnknownSync(SkillV2.Source)(source)),
             list: draft.list,
+            allowlist: (names) => draft.allowlist(names),
           }),
         ),
     },

@@ -6,6 +6,7 @@ import styles from "./member-section.module.css"
 import { UserRole } from "@opencode-ai/console-core/schema/user.sql.js"
 import { Actor } from "@opencode-ai/console-core/actor.js"
 import { User } from "@opencode-ai/console-core/user.js"
+import { Device } from "@opencode-ai/console-core/device.js"
 import { RoleDropdown } from "./role-dropdown"
 import { useI18n } from "~/context/i18n"
 import { useLanguage } from "~/context/language"
@@ -16,6 +17,7 @@ const listMembers = query(async (workspaceID: string) => {
   return withActor(async () => {
     return {
       members: await User.list(),
+      devices: await Device.list(),
       actorID: Actor.userID(),
       actorRole: Actor.userRole(),
     }
@@ -93,6 +95,7 @@ function MemberRow(props: {
   workspaceID: string
   actorID: string
   actorRole: string
+  lastSeen: Date | null
   roleOptions: { value: string; label: string; description: string }[]
 }) {
   const i18n = useI18n()
@@ -175,7 +178,15 @@ function MemberRow(props: {
           />
         </Show>
       </td>
-      <td data-slot="member-joined">{props.member.timeSeen ? "" : i18n.t("workspace.members.invited")}</td>
+      <td data-slot="member-joined">
+        {props.member.timeSeen
+          ? (props.lastSeen?.toLocaleDateString(undefined, {
+              month: "short",
+              day: "numeric",
+              timeZone: "UTC",
+            }) ?? "")
+          : i18n.t("workspace.members.invited")}
+      </td>
       <Show when={isAdmin()}>
         <td data-slot="member-actions">
           <Show
@@ -349,15 +360,21 @@ export function MemberSection() {
           <tbody>
             <Show when={data() && data()!.members.length > 0}>
               <For each={data()!.members}>
-                {(member) => (
-                  <MemberRow
-                    member={member}
-                    workspaceID={params.id!}
-                    actorID={data()!.actorID}
-                    actorRole={data()!.actorRole}
-                    roleOptions={roleOptions}
-                  />
-                )}
+                {(member) => {
+                  const seen = (data()?.devices ?? [])
+                    .filter((device) => device.userID === member.id && device.lastSeen)
+                    .map((device) => new Date(device.lastSeen).getTime())
+                  return (
+                    <MemberRow
+                      member={member}
+                      workspaceID={params.id!}
+                      actorID={data()!.actorID}
+                      actorRole={data()!.actorRole}
+                      lastSeen={seen.length > 0 ? new Date(Math.max(...seen)) : null}
+                      roleOptions={roleOptions}
+                    />
+                  )
+                }}
               </For>
             </Show>
           </tbody>

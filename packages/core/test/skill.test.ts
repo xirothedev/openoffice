@@ -118,6 +118,13 @@ describe("SkillV2", () => {
           expect((yield* skill.list()).map((item) => item.name)).toEqual(["deploy"])
           expect(pulls).toBe(1)
           expect(SkillV2.available(yield* skill.list(), (yield* agents.get(AgentV2.ID.make("reviewer")))!)).toEqual([])
+
+          yield* skill.transform((editor) => editor.allowlist(["deploy"]))
+          expect((yield* skill.list()).map((item) => item.name)).toEqual(["deploy"])
+          yield* skill.transform((editor) => editor.allowlist(["other"]))
+          expect(yield* skill.list()).toEqual([])
+          yield* skill.transform((editor) => editor.allowlist(undefined))
+          expect((yield* skill.list()).map((item) => item.name)).toEqual(["deploy"])
         }),
       ),
     ),

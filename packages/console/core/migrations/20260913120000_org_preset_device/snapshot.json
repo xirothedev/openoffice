@@ -1,0 +1,3587 @@
+{
+  "ddl": [
+    {
+      "entityType": "tables",
+      "name": "account"
+    },
+    {
+      "entityType": "tables",
+      "name": "auth"
+    },
+    {
+      "entityType": "tables",
+      "name": "benchmark"
+    },
+    {
+      "entityType": "tables",
+      "name": "billing"
+    },
+    {
+      "entityType": "tables",
+      "name": "coupon"
+    },
+    {
+      "entityType": "tables",
+      "name": "lite"
+    },
+    {
+      "entityType": "tables",
+      "name": "payment"
+    },
+    {
+      "entityType": "tables",
+      "name": "subscription"
+    },
+    {
+      "entityType": "tables",
+      "name": "usage"
+    },
+    {
+      "entityType": "tables",
+      "name": "ip_rate_limit"
+    },
+    {
+      "entityType": "tables",
+      "name": "ip"
+    },
+    {
+      "entityType": "tables",
+      "name": "key_rate_limit"
+    },
+    {
+      "entityType": "tables",
+      "name": "model_sticky_provider"
+    },
+    {
+      "entityType": "tables",
+      "name": "model_tpm_rate_limit"
+    },
+    {
+      "entityType": "tables",
+      "name": "model_tps_rate_limit"
+    },
+    {
+      "entityType": "tables",
+      "name": "key"
+    },
+    {
+      "entityType": "tables",
+      "name": "model"
+    },
+    {
+      "entityType": "tables",
+      "name": "provider"
+    },
+    {
+      "entityType": "tables",
+      "name": "referral_code"
+    },
+    {
+      "entityType": "tables",
+      "name": "referral_reward"
+    },
+    {
+      "entityType": "tables",
+      "name": "referral"
+    },
+    {
+      "entityType": "tables",
+      "name": "user"
+    },
+    {
+      "entityType": "tables",
+      "name": "workspace"
+    },
+    {
+      "entityType": "tables",
+      "name": "preset"
+    },
+    {
+      "entityType": "tables",
+      "name": "device"
+    },
+    {
+      "autoIncrement": false,
+      "charSet": null,
+      "collation": null,
+      "default": null,
+      "entityType": "columns",
+      "generated": null,
+      "name": "id",
+      "notNull": true,
+      "onUpdateNow": false,
+      "onUpdateNowFsp": null,
+      "table": "account",
+      "type": "varchar(30)"
+    },
+    {
+      "autoIncrement": false,
+      "charSet": null,
+      "collation": null,
+      "default": "(now())",
+      "entityType": "columns",
+      "generated": null,
+      "name": "time_created",
+      "notNull": true,
+      "onUpdateNow": false,
+      "onUpdateNowFsp": null,
+      "table": "account",
+      "type": "timestamp(3)"
+    },
+    {
+      "autoIncrement": false,
+      "charSet": null,
+      "collation": null,
+      "default": "(CURRENT_TIMESTAMP(3) ON UPDATE CURRENT_TIMESTAMP(3))",
+      "entityType": "columns",
+      "generated": null,
+      "name": "time_updated",
+      "notNull": true,
+      "onUpdateNow": false,
+      "onUpdateNowFsp": null,
+      "table": "account",
+      "type": "timestamp(3)"
+    },
+    {
+      "autoIncrement": false,
+      "charSet": null,
+      "collation": null,
+      "default": null,
+      "entityType": "columns",
+      "generated": null,
+      "name": "time_deleted",
+      "notNull": false,
+      "onUpdateNow": false,
+      "onUpdateNowFsp": null,
+      "table": "account",
+      "type": "timestamp(3)"
+    },
+    {
+      "autoIncrement": false,
+      "charSet": null,
+      "collation": null,
+      "default": null,
+      "entityType": "columns",
+      "generated": null,
+      "name": "id",
+      "notNull": true,
+      "onUpdateNow": false,
+      "onUpdateNowFsp": null,
+      "table": "auth",
+      "type": "varchar(30)"
+    },
+    {
+      "autoIncrement": false,
+      "charSet": null,
+      "collation": null,
+      "default": "(now())",
+      "entityType": "columns",
+      "generated": null,
+      "name": "time_created",
+      "notNull": true,
+      "onUpdateNow": false,
+      "onUpdateNowFsp": null,
+      "table": "auth",
+      "type": "timestamp(3)"
+    },
+    {
+      "autoIncrement": false,
+      "charSet": null,
+      "collation": null,
+      "default": "(CURRENT_TIMESTAMP(3) ON UPDATE CURRENT_TIMESTAMP(3))",
+      "entityType": "columns",
+      "generated": null,
+      "name": "time_updated",
+      "notNull": true,
+      "onUpdateNow": false,
+      "onUpdateNowFsp": null,
+      "table": "auth",
+      "type": "timestamp(3)"
+    },
+    {
+      "autoIncrement": false,
+      "charSet": null,
+      "collation": null,
+      "default": null,
+      "entityType": "columns",
+      "generated": null,
+      "name": "time_deleted",
+      "notNull": false,
+      "onUpdateNow": false,
+      "onUpdateNowFsp": null,
+      "table": "auth",
+      "type": "timestamp(3)"
+    },
+    {
+      "autoIncrement": false,
+      "charSet": null,
+      "collation": null,
+      "default": null,
+      "entityType": "columns",
+      "generated": null,
+      "name": "provider",
+      "notNull": true,
+      "onUpdateNow": false,
+      "onUpdateNowFsp": null,
+      "table": "auth",
+      "type": "enum('email','github','google')"
+    },
+    {
+      "autoIncrement": false,
+      "charSet": null,
+      "collation": null,
+      "default": null,
+      "entityType": "columns",
+      "generated": null,
+      "name": "subject",
+      "notNull": true,
+      "onUpdateNow": false,
+      "onUpdateNowFsp": null,
+      "table": "auth",
+      "type": "varchar(255)"
+    },
+    {
+      "autoIncrement": false,
+      "charSet": null,
+      "collation": null,
+      "default": null,
+      "entityType": "columns",
+      "generated": null,
+      "name": "account_id",
+      "notNull": true,
+      "onUpdateNow": false,
+      "onUpdateNowFsp": null,
+      "table": "auth",
+      "type": "varchar(30)"
+    },
+    {
+      "autoIncrement": false,
+      "charSet": null,
+      "collation": null,
+      "default": null,
+      "entityType": "columns",
+      "generated": null,
+      "name": "id",
+      "notNull": true,
+      "onUpdateNow": false,
+      "onUpdateNowFsp": null,
+      "table": "benchmark",
+      "type": "varchar(30)"
+    },
+    {
+      "autoIncrement": false,
+      "charSet": null,
+      "collation": null,
+      "default": "(now())",
+      "entityType": "columns",
+      "generated": null,
+      "name": "time_created",
+      "notNull": true,
+      "onUpdateNow": false,
+      "onUpdateNowFsp": null,
+      "table": "benchmark",
+      "type": "timestamp(3)"
+    },
+    {
+      "autoIncrement": false,
+      "charSet": null,
+      "collation": null,
+      "default": "(CURRENT_TIMESTAMP(3) ON UPDATE CURRENT_TIMESTAMP(3))",
+      "entityType": "columns",
+      "generated": null,
+      "name": "time_updated",
+      "notNull": true,
+      "onUpdateNow": false,
+      "onUpdateNowFsp": null,
+      "table": "benchmark",
+      "type": "timestamp(3)"
+    },
+    {
+      "autoIncrement": false,
+      "charSet": null,
+      "collation": null,
+      "default": null,
+      "entityType": "columns",
+      "generated": null,
+      "name": "time_deleted",
+      "notNull": false,
+      "onUpdateNow": false,
+      "onUpdateNowFsp": null,
+      "table": "benchmark",
+      "type": "timestamp(3)"
+    },
+    {
+      "autoIncrement": false,
+      "charSet": null,
+      "collation": null,
+      "default": null,
+      "entityType": "columns",
+      "generated": null,
+      "name": "model",
+      "notNull": true,
+      "onUpdateNow": false,
+      "onUpdateNowFsp": null,
+      "table": "benchmark",
+      "type": "varchar(64)"
+    },
+    {
+      "autoIncrement": false,
+      "charSet": null,
+      "collation": null,
+      "default": null,
+      "entityType": "columns",
+      "generated": null,
+      "name": "agent",
+      "notNull": true,
+      "onUpdateNow": false,
+      "onUpdateNowFsp": null,
+      "table": "benchmark",
+      "type": "varchar(64)"
+    },
+    {
+      "autoIncrement": false,
+      "charSet": null,
+      "collation": null,
+      "default": null,
+      "entityType": "columns",
+      "generated": null,
+      "name": "result",
+      "notNull": true,
+      "onUpdateNow": false,
+      "onUpdateNowFsp": null,
+      "table": "benchmark",
+      "type": "mediumtext"
+    },
+    {
+      "autoIncrement": false,
+      "charSet": null,
+      "collation": null,
+      "default": null,
+      "entityType": "columns",
+      "generated": null,
+      "name": "id",
+      "notNull": true,
+      "onUpdateNow": false,
+      "onUpdateNowFsp": null,
+      "table": "billing",
+      "type": "varchar(30)"
+    },
+    {
+      "autoIncrement": false,
+      "charSet": null,
+      "collation": null,
+      "default": null,
+      "entityType": "columns",
+      "generated": null,
+      "name": "workspace_id",
+      "notNull": true,
+      "onUpdateNow": false,
+      "onUpdateNowFsp": null,
+      "table": "billing",
+      "type": "varchar(30)"
+    },
+    {
+      "autoIncrement": false,
+      "charSet": null,
+      "collation": null,
+      "default": "(now())",
+      "entityType": "columns",
+      "generated": null,
+      "name": "time_created",
+      "notNull": true,
+      "onUpdateNow": false,
+      "onUpdateNowFsp": null,
+      "table": "billing",
+      "type": "timestamp(3)"
+    },
+    {
+      "autoIncrement": false,
+      "charSet": null,
+      "collation": null,
+      "default": "(CURRENT_TIMESTAMP(3) ON UPDATE CURRENT_TIMESTAMP(3))",
+      "entityType": "columns",
+      "generated": null,
+      "name": "time_updated",
+      "notNull": true,
+      "onUpdateNow": false,
+      "onUpdateNowFsp": null,
+      "table": "billing",
+      "type": "timestamp(3)"
+    },
+    {
+      "autoIncrement": false,
+      "charSet": null,
+      "collation": null,
+      "default": null,
+      "entityType": "columns",
+      "generated": null,
+      "name": "time_deleted",
+      "notNull": false,
+      "onUpdateNow": false,
+      "onUpdateNowFsp": null,
+      "table": "billing",
+      "type": "timestamp(3)"
+    },
+    {
+      "autoIncrement": false,
+      "charSet": null,
+      "collation": null,
+      "default": null,
+      "entityType": "columns",
+      "generated": null,
+      "name": "customer_id",
+      "notNull": false,
+      "onUpdateNow": false,
+      "onUpdateNowFsp": null,
+      "table": "billing",
+      "type": "varchar(255)"
+    },
+    {
+      "autoIncrement": false,
+      "charSet": null,
+      "collation": null,
+      "default": null,
+      "entityType": "columns",
+      "generated": null,
+      "name": "payment_method_id",
+      "notNull": false,
+      "onUpdateNow": false,
+      "onUpdateNowFsp": null,
+      "table": "billing",
+      "type": "varchar(255)"
+    },
+    {
+      "autoIncrement": false,
+      "charSet": null,
+      "collation": null,
+      "default": null,
+      "entityType": "columns",
+      "generated": null,
+      "name": "payment_method_type",
+      "notNull": false,
+      "onUpdateNow": false,
+      "onUpdateNowFsp": null,
+      "table": "billing",
+      "type": "varchar(32)"
+    },
+    {
+      "autoIncrement": false,
+      "charSet": null,
+      "collation": null,
+      "default": null,
+      "entityType": "columns",
+      "generated": null,
+      "name": "payment_method_last4",
+      "notNull": false,
+      "onUpdateNow": false,
+      "onUpdateNowFsp": null,
+      "table": "billing",
+      "type": "varchar(4)"
+    },
+    {
+      "autoIncrement": false,
+      "charSet": null,
+      "collation": null,
+      "default": null,
+      "entityType": "columns",
+      "generated": null,
+      "name": "balance",
+      "notNull": true,
+      "onUpdateNow": false,
+      "onUpdateNowFsp": null,
+      "table": "billing",
+      "type": "bigint"
+    },
+    {
+      "autoIncrement": false,
+      "charSet": null,
+      "collation": null,
+      "default": null,
+      "entityType": "columns",
+      "generated": null,
+      "name": "monthly_limit",
+      "notNull": false,
+      "onUpdateNow": false,
+      "onUpdateNowFsp": null,
+      "table": "billing",
+      "type": "int"
+    },
+    {
+      "autoIncrement": false,
+      "charSet": null,
+      "collation": null,
+      "default": null,
+      "entityType": "columns",
+      "generated": null,
+      "name": "monthly_usage",
+      "notNull": false,
+      "onUpdateNow": false,
+      "onUpdateNowFsp": null,
+      "table": "billing",
+      "type": "bigint"
+    },
+    {
+      "autoIncrement": false,
+      "charSet": null,
+      "collation": null,
+      "default": null,
+      "entityType": "columns",
+      "generated": null,
+      "name": "time_monthly_usage_updated",
+      "notNull": false,
+      "onUpdateNow": false,
+      "onUpdateNowFsp": null,
+      "table": "billing",
+      "type": "timestamp(3)"
+    },
+    {
+      "autoIncrement": false,
+      "charSet": null,
+      "collation": null,
+      "default": null,
+      "entityType": "columns",
+      "generated": null,
+      "name": "reload",
+      "notNull": false,
+      "onUpdateNow": false,
+      "onUpdateNowFsp": null,
+      "table": "billing",
+      "type": "boolean"
+    },
+    {
+      "autoIncrement": false,
+      "charSet": null,
+      "collation": null,
+      "default": null,
+      "entityType": "columns",
+      "generated": null,
+      "name": "reload_trigger",
+      "notNull": false,
+      "onUpdateNow": false,
+      "onUpdateNowFsp": null,
+      "table": "billing",
+      "type": "int"
+    },
+    {
+      "autoIncrement": false,
+      "charSet": null,
+      "collation": null,
+      "default": null,
+      "entityType": "columns",
+      "generated": null,
+      "name": "reload_amount",
+      "notNull": false,
+      "onUpdateNow": false,
+      "onUpdateNowFsp": null,
+      "table": "billing",
+      "type": "int"
+    },
+    {
+      "autoIncrement": false,
+      "charSet": null,
+      "collation": null,
+      "default": null,
+      "entityType": "columns",
+      "generated": null,
+      "name": "reload_error",
+      "notNull": false,
+      "onUpdateNow": false,
+      "onUpdateNowFsp": null,
+      "table": "billing",
+      "type": "varchar(255)"
+    },
+    {
+      "autoIncrement": false,
+      "charSet": null,
+      "collation": null,
+      "default": null,
+      "entityType": "columns",
+      "generated": null,
+      "name": "time_reload_error",
+      "notNull": false,
+      "onUpdateNow": false,
+      "onUpdateNowFsp": null,
+      "table": "billing",
+      "type": "timestamp(3)"
+    },
+    {
+      "autoIncrement": false,
+      "charSet": null,
+      "collation": null,
+      "default": null,
+      "entityType": "columns",
+      "generated": null,
+      "name": "time_reload_locked_till",
+      "notNull": false,
+      "onUpdateNow": false,
+      "onUpdateNowFsp": null,
+      "table": "billing",
+      "type": "timestamp(3)"
+    },
+    {
+      "autoIncrement": false,
+      "charSet": null,
+      "collation": null,
+      "default": null,
+      "entityType": "columns",
+      "generated": null,
+      "name": "subscription",
+      "notNull": false,
+      "onUpdateNow": false,
+      "onUpdateNowFsp": null,
+      "table": "billing",
+      "type": "json"
+    },
+    {
+      "autoIncrement": false,
+      "charSet": null,
+      "collation": null,
+      "default": null,
+      "entityType": "columns",
+      "generated": null,
+      "name": "subscription_id",
+      "notNull": false,
+      "onUpdateNow": false,
+      "onUpdateNowFsp": null,
+      "table": "billing",
+      "type": "varchar(28)"
+    },
+    {
+      "autoIncrement": false,
+      "charSet": null,
+      "collation": null,
+      "default": null,
+      "entityType": "columns",
+      "generated": null,
+      "name": "subscription_plan",
+      "notNull": false,
+      "onUpdateNow": false,
+      "onUpdateNowFsp": null,
+      "table": "billing",
+      "type": "enum('20','100','200')"
+    },
+    {
+      "autoIncrement": false,
+      "charSet": null,
+      "collation": null,
+      "default": null,
+      "entityType": "columns",
+      "generated": null,
+      "name": "time_subscription_booked",
+      "notNull": false,
+      "onUpdateNow": false,
+      "onUpdateNowFsp": null,
+      "table": "billing",
+      "type": "timestamp(3)"
+    },
+    {
+      "autoIncrement": false,
+      "charSet": null,
+      "collation": null,
+      "default": null,
+      "entityType": "columns",
+      "generated": null,
+      "name": "time_subscription_selected",
+      "notNull": false,
+      "onUpdateNow": false,
+      "onUpdateNowFsp": null,
+      "table": "billing",
+      "type": "timestamp(3)"
+    },
+    {
+      "autoIncrement": false,
+      "charSet": null,
+      "collation": null,
+      "default": null,
+      "entityType": "columns",
+      "generated": null,
+      "name": "lite_subscription_id",
+      "notNull": false,
+      "onUpdateNow": false,
+      "onUpdateNowFsp": null,
+      "table": "billing",
+      "type": "varchar(28)"
+    },
+    {
+      "autoIncrement": false,
+      "charSet": null,
+      "collation": null,
+      "default": null,
+      "entityType": "columns",
+      "generated": null,
+      "name": "lite",
+      "notNull": false,
+      "onUpdateNow": false,
+      "onUpdateNowFsp": null,
+      "table": "billing",
+      "type": "json"
+    },
+    {
+      "autoIncrement": false,
+      "charSet": null,
+      "collation": null,
+      "default": null,
+      "entityType": "columns",
+      "generated": null,
+      "name": "email",
+      "notNull": false,
+      "onUpdateNow": false,
+      "onUpdateNowFsp": null,
+      "table": "coupon",
+      "type": "varchar(255)"
+    },
+    {
+      "autoIncrement": false,
+      "charSet": null,
+      "collation": null,
+      "default": null,
+      "entityType": "columns",
+      "generated": null,
+      "name": "type",
+      "notNull": true,
+      "onUpdateNow": false,
+      "onUpdateNowFsp": null,
+      "table": "coupon",
+      "type": "enum('BUILDATHON','GO1MONTH50','GOFREEMONTH','GO3MONTHS100','GO6MONTHS100','GO12MONTHS100')"
+    },
+    {
+      "autoIncrement": false,
+      "charSet": null,
+      "collation": null,
+      "default": null,
+      "entityType": "columns",
+      "generated": null,
+      "name": "time_redeemed",
+      "notNull": false,
+      "onUpdateNow": false,
+      "onUpdateNowFsp": null,
+      "table": "coupon",
+      "type": "timestamp(3)"
+    },
+    {
+      "autoIncrement": false,
+      "charSet": null,
+      "collation": null,
+      "default": null,
+      "entityType": "columns",
+      "generated": null,
+      "name": "id",
+      "notNull": true,
+      "onUpdateNow": false,
+      "onUpdateNowFsp": null,
+      "table": "lite",
+      "type": "varchar(30)"
+    },
+    {
+      "autoIncrement": false,
+      "charSet": null,
+      "collation": null,
+      "default": null,
+      "entityType": "columns",
+      "generated": null,
+      "name": "workspace_id",
+      "notNull": true,
+      "onUpdateNow": false,
+      "onUpdateNowFsp": null,
+      "table": "lite",
+      "type": "varchar(30)"
+    },
+    {
+      "autoIncrement": false,
+      "charSet": null,
+      "collation": null,
+      "default": "(now())",
+      "entityType": "columns",
+      "generated": null,
+      "name": "time_created",
+      "notNull": true,
+      "onUpdateNow": false,
+      "onUpdateNowFsp": null,
+      "table": "lite",
+      "type": "timestamp(3)"
+    },
+    {
+      "autoIncrement": false,
+      "charSet": null,
+      "collation": null,
+      "default": "(CURRENT_TIMESTAMP(3) ON UPDATE CURRENT_TIMESTAMP(3))",
+      "entityType": "columns",
+      "generated": null,
+      "name": "time_updated",
+      "notNull": true,
+      "onUpdateNow": false,
+      "onUpdateNowFsp": null,
+      "table": "lite",
+      "type": "timestamp(3)"
+    },
+    {
+      "autoIncrement": false,
+      "charSet": null,
+      "collation": null,
+      "default": null,
+      "entityType": "columns",
+      "generated": null,
+      "name": "time_deleted",
+      "notNull": false,
+      "onUpdateNow": false,
+      "onUpdateNowFsp": null,
+      "table": "lite",
+      "type": "timestamp(3)"
+    },
+    {
+      "autoIncrement": false,
+      "charSet": null,
+      "collation": null,
+      "default": null,
+      "entityType": "columns",
+      "generated": null,
+      "name": "user_id",
+      "notNull": true,
+      "onUpdateNow": false,
+      "onUpdateNowFsp": null,
+      "table": "lite",
+      "type": "varchar(30)"
+    },
+    {
+      "autoIncrement": false,
+      "charSet": null,
+      "collation": null,
+      "default": null,
+      "entityType": "columns",
+      "generated": null,
+      "name": "rolling_usage",
+      "notNull": false,
+      "onUpdateNow": false,
+      "onUpdateNowFsp": null,
+      "table": "lite",
+      "type": "bigint"
+    },
+    {
+      "autoIncrement": false,
+      "charSet": null,
+      "collation": null,
+      "default": null,
+      "entityType": "columns",
+      "generated": null,
+      "name": "weekly_usage",
+      "notNull": false,
+      "onUpdateNow": false,
+      "onUpdateNowFsp": null,
+      "table": "lite",
+      "type": "bigint"
+    },
+    {
+      "autoIncrement": false,
+      "charSet": null,
+      "collation": null,
+      "default": null,
+      "entityType": "columns",
+      "generated": null,
+      "name": "monthly_usage",
+      "notNull": false,
+      "onUpdateNow": false,
+      "onUpdateNowFsp": null,
+      "table": "lite",
+      "type": "bigint"
+    },
+    {
+      "autoIncrement": false,
+      "charSet": null,
+      "collation": null,
+      "default": null,
+      "entityType": "columns",
+      "generated": null,
+      "name": "time_rolling_updated",
+      "notNull": false,
+      "onUpdateNow": false,
+      "onUpdateNowFsp": null,
+      "table": "lite",
+      "type": "timestamp(3)"
+    },
+    {
+      "autoIncrement": false,
+      "charSet": null,
+      "collation": null,
+      "default": null,
+      "entityType": "columns",
+      "generated": null,
+      "name": "time_weekly_updated",
+      "notNull": false,
+      "onUpdateNow": false,
+      "onUpdateNowFsp": null,
+      "table": "lite",
+      "type": "timestamp(3)"
+    },
+    {
+      "autoIncrement": false,
+      "charSet": null,
+      "collation": null,
+      "default": null,
+      "entityType": "columns",
+      "generated": null,
+      "name": "time_monthly_updated",
+      "notNull": false,
+      "onUpdateNow": false,
+      "onUpdateNowFsp": null,
+      "table": "lite",
+      "type": "timestamp(3)"
+    },
+    {
+      "autoIncrement": false,
+      "charSet": null,
+      "collation": null,
+      "default": null,
+      "entityType": "columns",
+      "generated": null,
+      "name": "id",
+      "notNull": true,
+      "onUpdateNow": false,
+      "onUpdateNowFsp": null,
+      "table": "payment",
+      "type": "varchar(30)"
+    },
+    {
+      "autoIncrement": false,
+      "charSet": null,
+      "collation": null,
+      "default": null,
+      "entityType": "columns",
+      "generated": null,
+      "name": "workspace_id",
+      "notNull": true,
+      "onUpdateNow": false,
+      "onUpdateNowFsp": null,
+      "table": "payment",
+      "type": "varchar(30)"
+    },
+    {
+      "autoIncrement": false,
+      "charSet": null,
+      "collation": null,
+      "default": "(now())",
+      "entityType": "columns",
+      "generated": null,
+      "name": "time_created",
+      "notNull": true,
+      "onUpdateNow": false,
+      "onUpdateNowFsp": null,
+      "table": "payment",
+      "type": "timestamp(3)"
+    },
+    {
+      "autoIncrement": false,
+      "charSet": null,
+      "collation": null,
+      "default": "(CURRENT_TIMESTAMP(3) ON UPDATE CURRENT_TIMESTAMP(3))",
+      "entityType": "columns",
+      "generated": null,
+      "name": "time_updated",
+      "notNull": true,
+      "onUpdateNow": false,
+      "onUpdateNowFsp": null,
+      "table": "payment",
+      "type": "timestamp(3)"
+    },
+    {
+      "autoIncrement": false,
+      "charSet": null,
+      "collation": null,
+      "default": null,
+      "entityType": "columns",
+      "generated": null,
+      "name": "time_deleted",
+      "notNull": false,
+      "onUpdateNow": false,
+      "onUpdateNowFsp": null,
+      "table": "payment",
+      "type": "timestamp(3)"
+    },
+    {
+      "autoIncrement": false,
+      "charSet": null,
+      "collation": null,
+      "default": null,
+      "entityType": "columns",
+      "generated": null,
+      "name": "customer_id",
+      "notNull": false,
+      "onUpdateNow": false,
+      "onUpdateNowFsp": null,
+      "table": "payment",
+      "type": "varchar(255)"
+    },
+    {
+      "autoIncrement": false,
+      "charSet": null,
+      "collation": null,
+      "default": null,
+      "entityType": "columns",
+      "generated": null,
+      "name": "invoice_id",
+      "notNull": false,
+      "onUpdateNow": false,
+      "onUpdateNowFsp": null,
+      "table": "payment",
+      "type": "varchar(255)"
+    },
+    {
+      "autoIncrement": false,
+      "charSet": null,
+      "collation": null,
+      "default": null,
+      "entityType": "columns",
+      "generated": null,
+      "name": "payment_id",
+      "notNull": false,
+      "onUpdateNow": false,
+      "onUpdateNowFsp": null,
+      "table": "payment",
+      "type": "varchar(255)"
+    },
+    {
+      "autoIncrement": false,
+      "charSet": null,
+      "collation": null,
+      "default": null,
+      "entityType": "columns",
+      "generated": null,
+      "name": "amount",
+      "notNull": true,
+      "onUpdateNow": false,
+      "onUpdateNowFsp": null,
+      "table": "payment",
+      "type": "bigint"
+    },
+    {
+      "autoIncrement": false,
+      "charSet": null,
+      "collation": null,
+      "default": null,
+      "entityType": "columns",
+      "generated": null,
+      "name": "time_refunded",
+      "notNull": false,
+      "onUpdateNow": false,
+      "onUpdateNowFsp": null,
+      "table": "payment",
+      "type": "timestamp(3)"
+    },
+    {
+      "autoIncrement": false,
+      "charSet": null,
+      "collation": null,
+      "default": null,
+      "entityType": "columns",
+      "generated": null,
+      "name": "enrichment",
+      "notNull": false,
+      "onUpdateNow": false,
+      "onUpdateNowFsp": null,
+      "table": "payment",
+      "type": "json"
+    },
+    {
+      "autoIncrement": false,
+      "charSet": null,
+      "collation": null,
+      "default": null,
+      "entityType": "columns",
+      "generated": null,
+      "name": "id",
+      "notNull": true,
+      "onUpdateNow": false,
+      "onUpdateNowFsp": null,
+      "table": "subscription",
+      "type": "varchar(30)"
+    },
+    {
+      "autoIncrement": false,
+      "charSet": null,
+      "collation": null,
+      "default": null,
+      "entityType": "columns",
+      "generated": null,
+      "name": "workspace_id",
+      "notNull": true,
+      "onUpdateNow": false,
+      "onUpdateNowFsp": null,
+      "table": "subscription",
+      "type": "varchar(30)"
+    },
+    {
+      "autoIncrement": false,
+      "charSet": null,
+      "collation": null,
+      "default": "(now())",
+      "entityType": "columns",
+      "generated": null,
+      "name": "time_created",
+      "notNull": true,
+      "onUpdateNow": false,
+      "onUpdateNowFsp": null,
+      "table": "subscription",
+      "type": "timestamp(3)"
+    },
+    {
+      "autoIncrement": false,
+      "charSet": null,
+      "collation": null,
+      "default": "(CURRENT_TIMESTAMP(3) ON UPDATE CURRENT_TIMESTAMP(3))",
+      "entityType": "columns",
+      "generated": null,
+      "name": "time_updated",
+      "notNull": true,
+      "onUpdateNow": false,
+      "onUpdateNowFsp": null,
+      "table": "subscription",
+      "type": "timestamp(3)"
+    },
+    {
+      "autoIncrement": false,
+      "charSet": null,
+      "collation": null,
+      "default": null,
+      "entityType": "columns",
+      "generated": null,
+      "name": "time_deleted",
+      "notNull": false,
+      "onUpdateNow": false,
+      "onUpdateNowFsp": null,
+      "table": "subscription",
+      "type": "timestamp(3)"
+    },
+    {
+      "autoIncrement": false,
+      "charSet": null,
+      "collation": null,
+      "default": null,
+      "entityType": "columns",
+      "generated": null,
+      "name": "user_id",
+      "notNull": true,
+      "onUpdateNow": false,
+      "onUpdateNowFsp": null,
+      "table": "subscription",
+      "type": "varchar(30)"
+    },
+    {
+      "autoIncrement": false,
+      "charSet": null,
+      "collation": null,
+      "default": null,
+      "entityType": "columns",
+      "generated": null,
+      "name": "rolling_usage",
+      "notNull": false,
+      "onUpdateNow": false,
+      "onUpdateNowFsp": null,
+      "table": "subscription",
+      "type": "bigint"
+    },
+    {
+      "autoIncrement": false,
+      "charSet": null,
+      "collation": null,
+      "default": null,
+      "entityType": "columns",
+      "generated": null,
+      "name": "fixed_usage",
+      "notNull": false,
+      "onUpdateNow": false,
+      "onUpdateNowFsp": null,
+      "table": "subscription",
+      "type": "bigint"
+    },
+    {
+      "autoIncrement": false,
+      "charSet": null,
+      "collation": null,
+      "default": null,
+      "entityType": "columns",
+      "generated": null,
+      "name": "time_rolling_updated",
+      "notNull": false,
+      "onUpdateNow": false,
+      "onUpdateNowFsp": null,
+      "table": "subscription",
+      "type": "timestamp(3)"
+    },
+    {
+      "autoIncrement": false,
+      "charSet": null,
+      "collation": null,
+      "default": null,
+      "entityType": "columns",
+      "generated": null,
+      "name": "time_fixed_updated",
+      "notNull": false,
+      "onUpdateNow": false,
+      "onUpdateNowFsp": null,
+      "table": "subscription",
+      "type": "timestamp(3)"
+    },
+    {
+      "autoIncrement": false,
+      "charSet": null,
+      "collation": null,
+      "default": null,
+      "entityType": "columns",
+      "generated": null,
+      "name": "id",
+      "notNull": true,
+      "onUpdateNow": false,
+      "onUpdateNowFsp": null,
+      "table": "usage",
+      "type": "varchar(30)"
+    },
+    {
+      "autoIncrement": false,
+      "charSet": null,
+      "collation": null,
+      "default": null,
+      "entityType": "columns",
+      "generated": null,
+      "name": "workspace_id",
+      "notNull": true,
+      "onUpdateNow": false,
+      "onUpdateNowFsp": null,
+      "table": "usage",
+      "type": "varchar(30)"
+    },
+    {
+      "autoIncrement": false,
+      "charSet": null,
+      "collation": null,
+      "default": "(now())",
+      "entityType": "columns",
+      "generated": null,
+      "name": "time_created",
+      "notNull": true,
+      "onUpdateNow": false,
+      "onUpdateNowFsp": null,
+      "table": "usage",
+      "type": "timestamp(3)"
+    },
+    {
+      "autoIncrement": false,
+      "charSet": null,
+      "collation": null,
+      "default": "(CURRENT_TIMESTAMP(3) ON UPDATE CURRENT_TIMESTAMP(3))",
+      "entityType": "columns",
+      "generated": null,
+      "name": "time_updated",
+      "notNull": true,
+      "onUpdateNow": false,
+      "onUpdateNowFsp": null,
+      "table": "usage",
+      "type": "timestamp(3)"
+    },
+    {
+      "autoIncrement": false,
+      "charSet": null,
+      "collation": null,
+      "default": null,
+      "entityType": "columns",
+      "generated": null,
+      "name": "time_deleted",
+      "notNull": false,
+      "onUpdateNow": false,
+      "onUpdateNowFsp": null,
+      "table": "usage",
+      "type": "timestamp(3)"
+    },
+    {
+      "autoIncrement": false,
+      "charSet": null,
+      "collation": null,
+      "default": null,
+      "entityType": "columns",
+      "generated": null,
+      "name": "model",
+      "notNull": true,
+      "onUpdateNow": false,
+      "onUpdateNowFsp": null,
+      "table": "usage",
+      "type": "varchar(255)"
+    },
+    {
+      "autoIncrement": false,
+      "charSet": null,
+      "collation": null,
+      "default": null,
+      "entityType": "columns",
+      "generated": null,
+      "name": "provider",
+      "notNull": true,
+      "onUpdateNow": false,
+      "onUpdateNowFsp": null,
+      "table": "usage",
+      "type": "varchar(255)"
+    },
+    {
+      "autoIncrement": false,
+      "charSet": null,
+      "collation": null,
+      "default": null,
+      "entityType": "columns",
+      "generated": null,
+      "name": "input_tokens",
+      "notNull": true,
+      "onUpdateNow": false,
+      "onUpdateNowFsp": null,
+      "table": "usage",
+      "type": "int"
+    },
+    {
+      "autoIncrement": false,
+      "charSet": null,
+      "collation": null,
+      "default": null,
+      "entityType": "columns",
+      "generated": null,
+      "name": "output_tokens",
+      "notNull": true,
+      "onUpdateNow": false,
+      "onUpdateNowFsp": null,
+      "table": "usage",
+      "type": "int"
+    },
+    {
+      "autoIncrement": false,
+      "charSet": null,
+      "collation": null,
+      "default": null,
+      "entityType": "columns",
+      "generated": null,
+      "name": "reasoning_tokens",
+      "notNull": false,
+      "onUpdateNow": false,
+      "onUpdateNowFsp": null,
+      "table": "usage",
+      "type": "int"
+    },
+    {
+      "autoIncrement": false,
+      "charSet": null,
+      "collation": null,
+      "default": null,
+      "entityType": "columns",
+      "generated": null,
+      "name": "cache_read_tokens",
+      "notNull": false,
+      "onUpdateNow": false,
+      "onUpdateNowFsp": null,
+      "table": "usage",
+      "type": "int"
+    },
+    {
+      "autoIncrement": false,
+      "charSet": null,
+      "collation": null,
+      "default": null,
+      "entityType": "columns",
+      "generated": null,
+      "name": "cache_write_5m_tokens",
+      "notNull": false,
+      "onUpdateNow": false,
+      "onUpdateNowFsp": null,
+      "table": "usage",
+      "type": "int"
+    },
+    {
+      "autoIncrement": false,
+      "charSet": null,
+      "collation": null,
+      "default": null,
+      "entityType": "columns",
+      "generated": null,
+      "name": "cache_write_1h_tokens",
+      "notNull": false,
+      "onUpdateNow": false,
+      "onUpdateNowFsp": null,
+      "table": "usage",
+      "type": "int"
+    },
+    {
+      "autoIncrement": false,
+      "charSet": null,
+      "collation": null,
+      "default": null,
+      "entityType": "columns",
+      "generated": null,
+      "name": "cost",
+      "notNull": true,
+      "onUpdateNow": false,
+      "onUpdateNowFsp": null,
+      "table": "usage",
+      "type": "bigint"
+    },
+    {
+      "autoIncrement": false,
+      "charSet": null,
+      "collation": null,
+      "default": null,
+      "entityType": "columns",
+      "generated": null,
+      "name": "key_id",
+      "notNull": false,
+      "onUpdateNow": false,
+      "onUpdateNowFsp": null,
+      "table": "usage",
+      "type": "varchar(30)"
+    },
+    {
+      "autoIncrement": false,
+      "charSet": null,
+      "collation": null,
+      "default": null,
+      "entityType": "columns",
+      "generated": null,
+      "name": "session_id",
+      "notNull": false,
+      "onUpdateNow": false,
+      "onUpdateNowFsp": null,
+      "table": "usage",
+      "type": "varchar(30)"
+    },
+    {
+      "autoIncrement": false,
+      "charSet": null,
+      "collation": null,
+      "default": null,
+      "entityType": "columns",
+      "generated": null,
+      "name": "enrichment",
+      "notNull": false,
+      "onUpdateNow": false,
+      "onUpdateNowFsp": null,
+      "table": "usage",
+      "type": "json"
+    },
+    {
+      "autoIncrement": false,
+      "charSet": null,
+      "collation": null,
+      "default": null,
+      "entityType": "columns",
+      "generated": null,
+      "name": "ip",
+      "notNull": true,
+      "onUpdateNow": false,
+      "onUpdateNowFsp": null,
+      "table": "ip_rate_limit",
+      "type": "varchar(45)"
+    },
+    {
+      "autoIncrement": false,
+      "charSet": null,
+      "collation": null,
+      "default": null,
+      "entityType": "columns",
+      "generated": null,
+      "name": "interval",
+      "notNull": true,
+      "onUpdateNow": false,
+      "onUpdateNowFsp": null,
+      "table": "ip_rate_limit",
+      "type": "varchar(10)"
+    },
+    {
+      "autoIncrement": false,
+      "charSet": null,
+      "collation": null,
+      "default": null,
+      "entityType": "columns",
+      "generated": null,
+      "name": "count",
+      "notNull": true,
+      "onUpdateNow": false,
+      "onUpdateNowFsp": null,
+      "table": "ip_rate_limit",
+      "type": "int"
+    },
+    {
+      "autoIncrement": false,
+      "charSet": null,
+      "collation": null,
+      "default": null,
+      "entityType": "columns",
+      "generated": null,
+      "name": "ip",
+      "notNull": true,
+      "onUpdateNow": false,
+      "onUpdateNowFsp": null,
+      "table": "ip",
+      "type": "varchar(45)"
+    },
+    {
+      "autoIncrement": false,
+      "charSet": null,
+      "collation": null,
+      "default": "(now())",
+      "entityType": "columns",
+      "generated": null,
+      "name": "time_created",
+      "notNull": true,
+      "onUpdateNow": false,
+      "onUpdateNowFsp": null,
+      "table": "ip",
+      "type": "timestamp(3)"
+    },
+    {
+      "autoIncrement": false,
+      "charSet": null,
+      "collation": null,
+      "default": "(CURRENT_TIMESTAMP(3) ON UPDATE CURRENT_TIMESTAMP(3))",
+      "entityType": "columns",
+      "generated": null,
+      "name": "time_updated",
+      "notNull": true,
+      "onUpdateNow": false,
+      "onUpdateNowFsp": null,
+      "table": "ip",
+      "type": "timestamp(3)"
+    },
+    {
+      "autoIncrement": false,
+      "charSet": null,
+      "collation": null,
+      "default": null,
+      "entityType": "columns",
+      "generated": null,
+      "name": "time_deleted",
+      "notNull": false,
+      "onUpdateNow": false,
+      "onUpdateNowFsp": null,
+      "table": "ip",
+      "type": "timestamp(3)"
+    },
+    {
+      "autoIncrement": false,
+      "charSet": null,
+      "collation": null,
+      "default": null,
+      "entityType": "columns",
+      "generated": null,
+      "name": "usage",
+      "notNull": false,
+      "onUpdateNow": false,
+      "onUpdateNowFsp": null,
+      "table": "ip",
+      "type": "int"
+    },
+    {
+      "autoIncrement": false,
+      "charSet": null,
+      "collation": null,
+      "default": null,
+      "entityType": "columns",
+      "generated": null,
+      "name": "key",
+      "notNull": true,
+      "onUpdateNow": false,
+      "onUpdateNowFsp": null,
+      "table": "key_rate_limit",
+      "type": "varchar(255)"
+    },
+    {
+      "autoIncrement": false,
+      "charSet": null,
+      "collation": null,
+      "default": null,
+      "entityType": "columns",
+      "generated": null,
+      "name": "interval",
+      "notNull": true,
+      "onUpdateNow": false,
+      "onUpdateNowFsp": null,
+      "table": "key_rate_limit",
+      "type": "varchar(40)"
+    },
+    {
+      "autoIncrement": false,
+      "charSet": null,
+      "collation": null,
+      "default": null,
+      "entityType": "columns",
+      "generated": null,
+      "name": "count",
+      "notNull": true,
+      "onUpdateNow": false,
+      "onUpdateNowFsp": null,
+      "table": "key_rate_limit",
+      "type": "int"
+    },
+    {
+      "autoIncrement": false,
+      "charSet": null,
+      "collation": null,
+      "default": null,
+      "entityType": "columns",
+      "generated": null,
+      "name": "id",
+      "notNull": true,
+      "onUpdateNow": false,
+      "onUpdateNowFsp": null,
+      "table": "model_sticky_provider",
+      "type": "varchar(255)"
+    },
+    {
+      "autoIncrement": false,
+      "charSet": null,
+      "collation": null,
+      "default": "(now())",
+      "entityType": "columns",
+      "generated": null,
+      "name": "time_created",
+      "notNull": true,
+      "onUpdateNow": false,
+      "onUpdateNowFsp": null,
+      "table": "model_sticky_provider",
+      "type": "timestamp(3)"
+    },
+    {
+      "autoIncrement": false,
+      "charSet": null,
+      "collation": null,
+      "default": "(CURRENT_TIMESTAMP(3) ON UPDATE CURRENT_TIMESTAMP(3))",
+      "entityType": "columns",
+      "generated": null,
+      "name": "time_updated",
+      "notNull": true,
+      "onUpdateNow": false,
+      "onUpdateNowFsp": null,
+      "table": "model_sticky_provider",
+      "type": "timestamp(3)"
+    },
+    {
+      "autoIncrement": false,
+      "charSet": null,
+      "collation": null,
+      "default": null,
+      "entityType": "columns",
+      "generated": null,
+      "name": "time_deleted",
+      "notNull": false,
+      "onUpdateNow": false,
+      "onUpdateNowFsp": null,
+      "table": "model_sticky_provider",
+      "type": "timestamp(3)"
+    },
+    {
+      "autoIncrement": false,
+      "charSet": null,
+      "collation": null,
+      "default": null,
+      "entityType": "columns",
+      "generated": null,
+      "name": "provider_id",
+      "notNull": true,
+      "onUpdateNow": false,
+      "onUpdateNowFsp": null,
+      "table": "model_sticky_provider",
+      "type": "varchar(255)"
+    },
+    {
+      "autoIncrement": false,
+      "charSet": null,
+      "collation": null,
+      "default": null,
+      "entityType": "columns",
+      "generated": null,
+      "name": "id",
+      "notNull": true,
+      "onUpdateNow": false,
+      "onUpdateNowFsp": null,
+      "table": "model_tpm_rate_limit",
+      "type": "varchar(255)"
+    },
+    {
+      "autoIncrement": false,
+      "charSet": null,
+      "collation": null,
+      "default": null,
+      "entityType": "columns",
+      "generated": null,
+      "name": "interval",
+      "notNull": true,
+      "onUpdateNow": false,
+      "onUpdateNowFsp": null,
+      "table": "model_tpm_rate_limit",
+      "type": "bigint"
+    },
+    {
+      "autoIncrement": false,
+      "charSet": null,
+      "collation": null,
+      "default": null,
+      "entityType": "columns",
+      "generated": null,
+      "name": "count",
+      "notNull": true,
+      "onUpdateNow": false,
+      "onUpdateNowFsp": null,
+      "table": "model_tpm_rate_limit",
+      "type": "int"
+    },
+    {
+      "autoIncrement": false,
+      "charSet": null,
+      "collation": null,
+      "default": null,
+      "entityType": "columns",
+      "generated": null,
+      "name": "id",
+      "notNull": true,
+      "onUpdateNow": false,
+      "onUpdateNowFsp": null,
+      "table": "model_tps_rate_limit",
+      "type": "varchar(255)"
+    },
+    {
+      "autoIncrement": false,
+      "charSet": null,
+      "collation": null,
+      "default": null,
+      "entityType": "columns",
+      "generated": null,
+      "name": "interval",
+      "notNull": true,
+      "onUpdateNow": false,
+      "onUpdateNowFsp": null,
+      "table": "model_tps_rate_limit",
+      "type": "bigint"
+    },
+    {
+      "autoIncrement": false,
+      "charSet": null,
+      "collation": null,
+      "default": null,
+      "entityType": "columns",
+      "generated": null,
+      "name": "qualify",
+      "notNull": true,
+      "onUpdateNow": false,
+      "onUpdateNowFsp": null,
+      "table": "model_tps_rate_limit",
+      "type": "int"
+    },
+    {
+      "autoIncrement": false,
+      "charSet": null,
+      "collation": null,
+      "default": null,
+      "entityType": "columns",
+      "generated": null,
+      "name": "unqualify",
+      "notNull": true,
+      "onUpdateNow": false,
+      "onUpdateNowFsp": null,
+      "table": "model_tps_rate_limit",
+      "type": "int"
+    },
+    {
+      "autoIncrement": false,
+      "charSet": null,
+      "collation": null,
+      "default": null,
+      "entityType": "columns",
+      "generated": null,
+      "name": "id",
+      "notNull": true,
+      "onUpdateNow": false,
+      "onUpdateNowFsp": null,
+      "table": "key",
+      "type": "varchar(30)"
+    },
+    {
+      "autoIncrement": false,
+      "charSet": null,
+      "collation": null,
+      "default": null,
+      "entityType": "columns",
+      "generated": null,
+      "name": "workspace_id",
+      "notNull": true,
+      "onUpdateNow": false,
+      "onUpdateNowFsp": null,
+      "table": "key",
+      "type": "varchar(30)"
+    },
+    {
+      "autoIncrement": false,
+      "charSet": null,
+      "collation": null,
+      "default": "(now())",
+      "entityType": "columns",
+      "generated": null,
+      "name": "time_created",
+      "notNull": true,
+      "onUpdateNow": false,
+      "onUpdateNowFsp": null,
+      "table": "key",
+      "type": "timestamp(3)"
+    },
+    {
+      "autoIncrement": false,
+      "charSet": null,
+      "collation": null,
+      "default": "(CURRENT_TIMESTAMP(3) ON UPDATE CURRENT_TIMESTAMP(3))",
+      "entityType": "columns",
+      "generated": null,
+      "name": "time_updated",
+      "notNull": true,
+      "onUpdateNow": false,
+      "onUpdateNowFsp": null,
+      "table": "key",
+      "type": "timestamp(3)"
+    },
+    {
+      "autoIncrement": false,
+      "charSet": null,
+      "collation": null,
+      "default": null,
+      "entityType": "columns",
+      "generated": null,
+      "name": "time_deleted",
+      "notNull": false,
+      "onUpdateNow": false,
+      "onUpdateNowFsp": null,
+      "table": "key",
+      "type": "timestamp(3)"
+    },
+    {
+      "autoIncrement": false,
+      "charSet": null,
+      "collation": null,
+      "default": null,
+      "entityType": "columns",
+      "generated": null,
+      "name": "name",
+      "notNull": true,
+      "onUpdateNow": false,
+      "onUpdateNowFsp": null,
+      "table": "key",
+      "type": "varchar(255)"
+    },
+    {
+      "autoIncrement": false,
+      "charSet": null,
+      "collation": null,
+      "default": null,
+      "entityType": "columns",
+      "generated": null,
+      "name": "key",
+      "notNull": true,
+      "onUpdateNow": false,
+      "onUpdateNowFsp": null,
+      "table": "key",
+      "type": "varchar(255)"
+    },
+    {
+      "autoIncrement": false,
+      "charSet": null,
+      "collation": null,
+      "default": null,
+      "entityType": "columns",
+      "generated": null,
+      "name": "user_id",
+      "notNull": true,
+      "onUpdateNow": false,
+      "onUpdateNowFsp": null,
+      "table": "key",
+      "type": "varchar(30)"
+    },
+    {
+      "autoIncrement": false,
+      "charSet": null,
+      "collation": null,
+      "default": null,
+      "entityType": "columns",
+      "generated": null,
+      "name": "time_used",
+      "notNull": false,
+      "onUpdateNow": false,
+      "onUpdateNowFsp": null,
+      "table": "key",
+      "type": "timestamp(3)"
+    },
+    {
+      "autoIncrement": false,
+      "charSet": null,
+      "collation": null,
+      "default": null,
+      "entityType": "columns",
+      "generated": null,
+      "name": "id",
+      "notNull": true,
+      "onUpdateNow": false,
+      "onUpdateNowFsp": null,
+      "table": "model",
+      "type": "varchar(30)"
+    },
+    {
+      "autoIncrement": false,
+      "charSet": null,
+      "collation": null,
+      "default": null,
+      "entityType": "columns",
+      "generated": null,
+      "name": "workspace_id",
+      "notNull": true,
+      "onUpdateNow": false,
+      "onUpdateNowFsp": null,
+      "table": "model",
+      "type": "varchar(30)"
+    },
+    {
+      "autoIncrement": false,
+      "charSet": null,
+      "collation": null,
+      "default": "(now())",
+      "entityType": "columns",
+      "generated": null,
+      "name": "time_created",
+      "notNull": true,
+      "onUpdateNow": false,
+      "onUpdateNowFsp": null,
+      "table": "model",
+      "type": "timestamp(3)"
+    },
+    {
+      "autoIncrement": false,
+      "charSet": null,
+      "collation": null,
+      "default": "(CURRENT_TIMESTAMP(3) ON UPDATE CURRENT_TIMESTAMP(3))",
+      "entityType": "columns",
+      "generated": null,
+      "name": "time_updated",
+      "notNull": true,
+      "onUpdateNow": false,
+      "onUpdateNowFsp": null,
+      "table": "model",
+      "type": "timestamp(3)"
+    },
+    {
+      "autoIncrement": false,
+      "charSet": null,
+      "collation": null,
+      "default": null,
+      "entityType": "columns",
+      "generated": null,
+      "name": "time_deleted",
+      "notNull": false,
+      "onUpdateNow": false,
+      "onUpdateNowFsp": null,
+      "table": "model",
+      "type": "timestamp(3)"
+    },
+    {
+      "autoIncrement": false,
+      "charSet": null,
+      "collation": null,
+      "default": null,
+      "entityType": "columns",
+      "generated": null,
+      "name": "model",
+      "notNull": true,
+      "onUpdateNow": false,
+      "onUpdateNowFsp": null,
+      "table": "model",
+      "type": "varchar(64)"
+    },
+    {
+      "autoIncrement": false,
+      "charSet": null,
+      "collation": null,
+      "default": null,
+      "entityType": "columns",
+      "generated": null,
+      "name": "id",
+      "notNull": true,
+      "onUpdateNow": false,
+      "onUpdateNowFsp": null,
+      "table": "provider",
+      "type": "varchar(30)"
+    },
+    {
+      "autoIncrement": false,
+      "charSet": null,
+      "collation": null,
+      "default": null,
+      "entityType": "columns",
+      "generated": null,
+      "name": "workspace_id",
+      "notNull": true,
+      "onUpdateNow": false,
+      "onUpdateNowFsp": null,
+      "table": "provider",
+      "type": "varchar(30)"
+    },
+    {
+      "autoIncrement": false,
+      "charSet": null,
+      "collation": null,
+      "default": "(now())",
+      "entityType": "columns",
+      "generated": null,
+      "name": "time_created",
+      "notNull": true,
+      "onUpdateNow": false,
+      "onUpdateNowFsp": null,
+      "table": "provider",
+      "type": "timestamp(3)"
+    },
+    {
+      "autoIncrement": false,
+      "charSet": null,
+      "collation": null,
+      "default": "(CURRENT_TIMESTAMP(3) ON UPDATE CURRENT_TIMESTAMP(3))",
+      "entityType": "columns",
+      "generated": null,
+      "name": "time_updated",
+      "notNull": true,
+      "onUpdateNow": false,
+      "onUpdateNowFsp": null,
+      "table": "provider",
+      "type": "timestamp(3)"
+    },
+    {
+      "autoIncrement": false,
+      "charSet": null,
+      "collation": null,
+      "default": null,
+      "entityType": "columns",
+      "generated": null,
+      "name": "time_deleted",
+      "notNull": false,
+      "onUpdateNow": false,
+      "onUpdateNowFsp": null,
+      "table": "provider",
+      "type": "timestamp(3)"
+    },
+    {
+      "autoIncrement": false,
+      "charSet": null,
+      "collation": null,
+      "default": null,
+      "entityType": "columns",
+      "generated": null,
+      "name": "provider",
+      "notNull": true,
+      "onUpdateNow": false,
+      "onUpdateNowFsp": null,
+      "table": "provider",
+      "type": "varchar(64)"
+    },
+    {
+      "autoIncrement": false,
+      "charSet": null,
+      "collation": null,
+      "default": null,
+      "entityType": "columns",
+      "generated": null,
+      "name": "credentials",
+      "notNull": true,
+      "onUpdateNow": false,
+      "onUpdateNowFsp": null,
+      "table": "provider",
+      "type": "text"
+    },
+    {
+      "autoIncrement": false,
+      "charSet": null,
+      "collation": null,
+      "default": null,
+      "entityType": "columns",
+      "generated": null,
+      "name": "workspace_id",
+      "notNull": true,
+      "onUpdateNow": false,
+      "onUpdateNowFsp": null,
+      "table": "referral_code",
+      "type": "varchar(30)"
+    },
+    {
+      "autoIncrement": false,
+      "charSet": null,
+      "collation": null,
+      "default": null,
+      "entityType": "columns",
+      "generated": null,
+      "name": "code",
+      "notNull": true,
+      "onUpdateNow": false,
+      "onUpdateNowFsp": null,
+      "table": "referral_code",
+      "type": "varchar(10)"
+    },
+    {
+      "autoIncrement": false,
+      "charSet": null,
+      "collation": null,
+      "default": "(now())",
+      "entityType": "columns",
+      "generated": null,
+      "name": "time_created",
+      "notNull": true,
+      "onUpdateNow": false,
+      "onUpdateNowFsp": null,
+      "table": "referral_code",
+      "type": "timestamp(3)"
+    },
+    {
+      "autoIncrement": false,
+      "charSet": null,
+      "collation": null,
+      "default": "(CURRENT_TIMESTAMP(3) ON UPDATE CURRENT_TIMESTAMP(3))",
+      "entityType": "columns",
+      "generated": null,
+      "name": "time_updated",
+      "notNull": true,
+      "onUpdateNow": false,
+      "onUpdateNowFsp": null,
+      "table": "referral_code",
+      "type": "timestamp(3)"
+    },
+    {
+      "autoIncrement": false,
+      "charSet": null,
+      "collation": null,
+      "default": null,
+      "entityType": "columns",
+      "generated": null,
+      "name": "time_deleted",
+      "notNull": false,
+      "onUpdateNow": false,
+      "onUpdateNowFsp": null,
+      "table": "referral_code",
+      "type": "timestamp(3)"
+    },
+    {
+      "autoIncrement": false,
+      "charSet": null,
+      "collation": null,
+      "default": null,
+      "entityType": "columns",
+      "generated": null,
+      "name": "workspace_id",
+      "notNull": true,
+      "onUpdateNow": false,
+      "onUpdateNowFsp": null,
+      "table": "referral_reward",
+      "type": "varchar(30)"
+    },
+    {
+      "autoIncrement": false,
+      "charSet": null,
+      "collation": null,
+      "default": null,
+      "entityType": "columns",
+      "generated": null,
+      "name": "referral_id",
+      "notNull": true,
+      "onUpdateNow": false,
+      "onUpdateNowFsp": null,
+      "table": "referral_reward",
+      "type": "varchar(30)"
+    },
+    {
+      "autoIncrement": false,
+      "charSet": null,
+      "collation": null,
+      "default": "(now())",
+      "entityType": "columns",
+      "generated": null,
+      "name": "time_created",
+      "notNull": true,
+      "onUpdateNow": false,
+      "onUpdateNowFsp": null,
+      "table": "referral_reward",
+      "type": "timestamp(3)"
+    },
+    {
+      "autoIncrement": false,
+      "charSet": null,
+      "collation": null,
+      "default": "(CURRENT_TIMESTAMP(3) ON UPDATE CURRENT_TIMESTAMP(3))",
+      "entityType": "columns",
+      "generated": null,
+      "name": "time_updated",
+      "notNull": true,
+      "onUpdateNow": false,
+      "onUpdateNowFsp": null,
+      "table": "referral_reward",
+      "type": "timestamp(3)"
+    },
+    {
+      "autoIncrement": false,
+      "charSet": null,
+      "collation": null,
+      "default": null,
+      "entityType": "columns",
+      "generated": null,
+      "name": "time_deleted",
+      "notNull": false,
+      "onUpdateNow": false,
+      "onUpdateNowFsp": null,
+      "table": "referral_reward",
+      "type": "timestamp(3)"
+    },
+    {
+      "autoIncrement": false,
+      "charSet": null,
+      "collation": null,
+      "default": null,
+      "entityType": "columns",
+      "generated": null,
+      "name": "amount",
+      "notNull": true,
+      "onUpdateNow": false,
+      "onUpdateNowFsp": null,
+      "table": "referral_reward",
+      "type": "bigint"
+    },
+    {
+      "autoIncrement": false,
+      "charSet": null,
+      "collation": null,
+      "default": null,
+      "entityType": "columns",
+      "generated": null,
+      "name": "time_applied",
+      "notNull": false,
+      "onUpdateNow": false,
+      "onUpdateNowFsp": null,
+      "table": "referral_reward",
+      "type": "timestamp(3)"
+    },
+    {
+      "autoIncrement": false,
+      "charSet": null,
+      "collation": null,
+      "default": null,
+      "entityType": "columns",
+      "generated": null,
+      "name": "id",
+      "notNull": true,
+      "onUpdateNow": false,
+      "onUpdateNowFsp": null,
+      "table": "referral",
+      "type": "varchar(30)"
+    },
+    {
+      "autoIncrement": false,
+      "charSet": null,
+      "collation": null,
+      "default": null,
+      "entityType": "columns",
+      "generated": null,
+      "name": "workspace_id",
+      "notNull": true,
+      "onUpdateNow": false,
+      "onUpdateNowFsp": null,
+      "table": "referral",
+      "type": "varchar(30)"
+    },
+    {
+      "autoIncrement": false,
+      "charSet": null,
+      "collation": null,
+      "default": "(now())",
+      "entityType": "columns",
+      "generated": null,
+      "name": "time_created",
+      "notNull": true,
+      "onUpdateNow": false,
+      "onUpdateNowFsp": null,
+      "table": "referral",
+      "type": "timestamp(3)"
+    },
+    {
+      "autoIncrement": false,
+      "charSet": null,
+      "collation": null,
+      "default": "(CURRENT_TIMESTAMP(3) ON UPDATE CURRENT_TIMESTAMP(3))",
+      "entityType": "columns",
+      "generated": null,
+      "name": "time_updated",
+      "notNull": true,
+      "onUpdateNow": false,
+      "onUpdateNowFsp": null,
+      "table": "referral",
+      "type": "timestamp(3)"
+    },
+    {
+      "autoIncrement": false,
+      "charSet": null,
+      "collation": null,
+      "default": null,
+      "entityType": "columns",
+      "generated": null,
+      "name": "time_deleted",
+      "notNull": false,
+      "onUpdateNow": false,
+      "onUpdateNowFsp": null,
+      "table": "referral",
+      "type": "timestamp(3)"
+    },
+    {
+      "autoIncrement": false,
+      "charSet": null,
+      "collation": null,
+      "default": null,
+      "entityType": "columns",
+      "generated": null,
+      "name": "invitee_account_id",
+      "notNull": true,
+      "onUpdateNow": false,
+      "onUpdateNowFsp": null,
+      "table": "referral",
+      "type": "varchar(30)"
+    },
+    {
+      "autoIncrement": false,
+      "charSet": null,
+      "collation": null,
+      "default": null,
+      "entityType": "columns",
+      "generated": null,
+      "name": "id",
+      "notNull": true,
+      "onUpdateNow": false,
+      "onUpdateNowFsp": null,
+      "table": "user",
+      "type": "varchar(30)"
+    },
+    {
+      "autoIncrement": false,
+      "charSet": null,
+      "collation": null,
+      "default": null,
+      "entityType": "columns",
+      "generated": null,
+      "name": "workspace_id",
+      "notNull": true,
+      "onUpdateNow": false,
+      "onUpdateNowFsp": null,
+      "table": "user",
+      "type": "varchar(30)"
+    },
+    {
+      "autoIncrement": false,
+      "charSet": null,
+      "collation": null,
+      "default": "(now())",
+      "entityType": "columns",
+      "generated": null,
+      "name": "time_created",
+      "notNull": true,
+      "onUpdateNow": false,
+      "onUpdateNowFsp": null,
+      "table": "user",
+      "type": "timestamp(3)"
+    },
+    {
+      "autoIncrement": false,
+      "charSet": null,
+      "collation": null,
+      "default": "(CURRENT_TIMESTAMP(3) ON UPDATE CURRENT_TIMESTAMP(3))",
+      "entityType": "columns",
+      "generated": null,
+      "name": "time_updated",
+      "notNull": true,
+      "onUpdateNow": false,
+      "onUpdateNowFsp": null,
+      "table": "user",
+      "type": "timestamp(3)"
+    },
+    {
+      "autoIncrement": false,
+      "charSet": null,
+      "collation": null,
+      "default": null,
+      "entityType": "columns",
+      "generated": null,
+      "name": "time_deleted",
+      "notNull": false,
+      "onUpdateNow": false,
+      "onUpdateNowFsp": null,
+      "table": "user",
+      "type": "timestamp(3)"
+    },
+    {
+      "autoIncrement": false,
+      "charSet": null,
+      "collation": null,
+      "default": null,
+      "entityType": "columns",
+      "generated": null,
+      "name": "account_id",
+      "notNull": false,
+      "onUpdateNow": false,
+      "onUpdateNowFsp": null,
+      "table": "user",
+      "type": "varchar(30)"
+    },
+    {
+      "autoIncrement": false,
+      "charSet": null,
+      "collation": null,
+      "default": null,
+      "entityType": "columns",
+      "generated": null,
+      "name": "email",
+      "notNull": false,
+      "onUpdateNow": false,
+      "onUpdateNowFsp": null,
+      "table": "user",
+      "type": "varchar(255)"
+    },
+    {
+      "autoIncrement": false,
+      "charSet": null,
+      "collation": null,
+      "default": null,
+      "entityType": "columns",
+      "generated": null,
+      "name": "name",
+      "notNull": true,
+      "onUpdateNow": false,
+      "onUpdateNowFsp": null,
+      "table": "user",
+      "type": "varchar(255)"
+    },
+    {
+      "autoIncrement": false,
+      "charSet": null,
+      "collation": null,
+      "default": null,
+      "entityType": "columns",
+      "generated": null,
+      "name": "time_seen",
+      "notNull": false,
+      "onUpdateNow": false,
+      "onUpdateNowFsp": null,
+      "table": "user",
+      "type": "timestamp(3)"
+    },
+    {
+      "autoIncrement": false,
+      "charSet": null,
+      "collation": null,
+      "default": null,
+      "entityType": "columns",
+      "generated": null,
+      "name": "color",
+      "notNull": false,
+      "onUpdateNow": false,
+      "onUpdateNowFsp": null,
+      "table": "user",
+      "type": "int"
+    },
+    {
+      "autoIncrement": false,
+      "charSet": null,
+      "collation": null,
+      "default": null,
+      "entityType": "columns",
+      "generated": null,
+      "name": "role",
+      "notNull": true,
+      "onUpdateNow": false,
+      "onUpdateNowFsp": null,
+      "table": "user",
+      "type": "enum('admin','member')"
+    },
+    {
+      "autoIncrement": false,
+      "charSet": null,
+      "collation": null,
+      "default": null,
+      "entityType": "columns",
+      "generated": null,
+      "name": "monthly_limit",
+      "notNull": false,
+      "onUpdateNow": false,
+      "onUpdateNowFsp": null,
+      "table": "user",
+      "type": "int"
+    },
+    {
+      "autoIncrement": false,
+      "charSet": null,
+      "collation": null,
+      "default": null,
+      "entityType": "columns",
+      "generated": null,
+      "name": "monthly_usage",
+      "notNull": false,
+      "onUpdateNow": false,
+      "onUpdateNowFsp": null,
+      "table": "user",
+      "type": "bigint"
+    },
+    {
+      "autoIncrement": false,
+      "charSet": null,
+      "collation": null,
+      "default": null,
+      "entityType": "columns",
+      "generated": null,
+      "name": "time_monthly_usage_updated",
+      "notNull": false,
+      "onUpdateNow": false,
+      "onUpdateNowFsp": null,
+      "table": "user",
+      "type": "timestamp(3)"
+    },
+    {
+      "autoIncrement": false,
+      "charSet": null,
+      "collation": null,
+      "default": null,
+      "entityType": "columns",
+      "generated": null,
+      "name": "id",
+      "notNull": true,
+      "onUpdateNow": false,
+      "onUpdateNowFsp": null,
+      "table": "workspace",
+      "type": "varchar(30)"
+    },
+    {
+      "autoIncrement": false,
+      "charSet": null,
+      "collation": null,
+      "default": null,
+      "entityType": "columns",
+      "generated": null,
+      "name": "slug",
+      "notNull": false,
+      "onUpdateNow": false,
+      "onUpdateNowFsp": null,
+      "table": "workspace",
+      "type": "varchar(255)"
+    },
+    {
+      "autoIncrement": false,
+      "charSet": null,
+      "collation": null,
+      "default": null,
+      "entityType": "columns",
+      "generated": null,
+      "name": "name",
+      "notNull": true,
+      "onUpdateNow": false,
+      "onUpdateNowFsp": null,
+      "table": "workspace",
+      "type": "varchar(255)"
+    },
+    {
+      "autoIncrement": false,
+      "charSet": null,
+      "collation": null,
+      "default": null,
+      "entityType": "columns",
+      "generated": null,
+      "name": "region",
+      "notNull": false,
+      "onUpdateNow": false,
+      "onUpdateNowFsp": null,
+      "table": "workspace",
+      "type": "json"
+    },
+    {
+      "autoIncrement": false,
+      "charSet": null,
+      "collation": null,
+      "default": null,
+      "entityType": "columns",
+      "generated": null,
+      "name": "allow_training",
+      "notNull": false,
+      "onUpdateNow": false,
+      "onUpdateNowFsp": null,
+      "table": "workspace",
+      "type": "boolean"
+    },
+    {
+      "autoIncrement": false,
+      "charSet": null,
+      "collation": null,
+      "default": null,
+      "entityType": "columns",
+      "generated": null,
+      "name": "is_blocked",
+      "notNull": false,
+      "onUpdateNow": false,
+      "onUpdateNowFsp": null,
+      "table": "workspace",
+      "type": "boolean"
+    },
+    {
+      "autoIncrement": false,
+      "charSet": null,
+      "collation": null,
+      "default": null,
+      "entityType": "columns",
+      "generated": null,
+      "name": "is_flagged_by_anthropic",
+      "notNull": false,
+      "onUpdateNow": false,
+      "onUpdateNowFsp": null,
+      "table": "workspace",
+      "type": "boolean"
+    },
+    {
+      "autoIncrement": false,
+      "charSet": null,
+      "collation": null,
+      "default": null,
+      "entityType": "columns",
+      "generated": null,
+      "name": "is_flagged_by_openai",
+      "notNull": false,
+      "onUpdateNow": false,
+      "onUpdateNowFsp": null,
+      "table": "workspace",
+      "type": "boolean"
+    },
+    {
+      "autoIncrement": false,
+      "charSet": null,
+      "collation": null,
+      "default": null,
+      "entityType": "columns",
+      "generated": null,
+      "name": "migrated_at",
+      "notNull": false,
+      "onUpdateNow": false,
+      "onUpdateNowFsp": null,
+      "table": "workspace",
+      "type": "timestamp(3)"
+    },
+    {
+      "autoIncrement": false,
+      "charSet": null,
+      "collation": null,
+      "default": "(now())",
+      "entityType": "columns",
+      "generated": null,
+      "name": "time_created",
+      "notNull": true,
+      "onUpdateNow": false,
+      "onUpdateNowFsp": null,
+      "table": "workspace",
+      "type": "timestamp(3)"
+    },
+    {
+      "autoIncrement": false,
+      "charSet": null,
+      "collation": null,
+      "default": "(CURRENT_TIMESTAMP(3) ON UPDATE CURRENT_TIMESTAMP(3))",
+      "entityType": "columns",
+      "generated": null,
+      "name": "time_updated",
+      "notNull": true,
+      "onUpdateNow": false,
+      "onUpdateNowFsp": null,
+      "table": "workspace",
+      "type": "timestamp(3)"
+    },
+    {
+      "autoIncrement": false,
+      "charSet": null,
+      "collation": null,
+      "default": null,
+      "entityType": "columns",
+      "generated": null,
+      "name": "time_deleted",
+      "notNull": false,
+      "onUpdateNow": false,
+      "onUpdateNowFsp": null,
+      "table": "workspace",
+      "type": "timestamp(3)"
+    },
+    {
+      "autoIncrement": false,
+      "charSet": null,
+      "collation": null,
+      "default": null,
+      "entityType": "columns",
+      "generated": null,
+      "name": "id",
+      "notNull": true,
+      "onUpdateNow": false,
+      "onUpdateNowFsp": null,
+      "table": "preset",
+      "type": "varchar(30)"
+    },
+    {
+      "autoIncrement": false,
+      "charSet": null,
+      "collation": null,
+      "default": null,
+      "entityType": "columns",
+      "generated": null,
+      "name": "workspace_id",
+      "notNull": true,
+      "onUpdateNow": false,
+      "onUpdateNowFsp": null,
+      "table": "preset",
+      "type": "varchar(30)"
+    },
+    {
+      "autoIncrement": false,
+      "charSet": null,
+      "collation": null,
+      "default": "(now())",
+      "entityType": "columns",
+      "generated": null,
+      "name": "time_created",
+      "notNull": true,
+      "onUpdateNow": false,
+      "onUpdateNowFsp": null,
+      "table": "preset",
+      "type": "timestamp(3)"
+    },
+    {
+      "autoIncrement": false,
+      "charSet": null,
+      "collation": null,
+      "default": "(CURRENT_TIMESTAMP(3) ON UPDATE CURRENT_TIMESTAMP(3))",
+      "entityType": "columns",
+      "generated": null,
+      "name": "time_updated",
+      "notNull": true,
+      "onUpdateNow": false,
+      "onUpdateNowFsp": null,
+      "table": "preset",
+      "type": "timestamp(3)"
+    },
+    {
+      "autoIncrement": false,
+      "charSet": null,
+      "collation": null,
+      "default": null,
+      "entityType": "columns",
+      "generated": null,
+      "name": "time_deleted",
+      "notNull": false,
+      "onUpdateNow": false,
+      "onUpdateNowFsp": null,
+      "table": "preset",
+      "type": "timestamp(3)"
+    },
+    {
+      "autoIncrement": false,
+      "charSet": null,
+      "collation": null,
+      "default": null,
+      "entityType": "columns",
+      "generated": null,
+      "name": "model",
+      "notNull": false,
+      "onUpdateNow": false,
+      "onUpdateNowFsp": null,
+      "table": "preset",
+      "type": "varchar(255)"
+    },
+    {
+      "autoIncrement": false,
+      "charSet": null,
+      "collation": null,
+      "default": null,
+      "entityType": "columns",
+      "generated": null,
+      "name": "key_ref",
+      "notNull": false,
+      "onUpdateNow": false,
+      "onUpdateNowFsp": null,
+      "table": "preset",
+      "type": "varchar(255)"
+    },
+    {
+      "autoIncrement": false,
+      "charSet": null,
+      "collation": null,
+      "default": null,
+      "entityType": "columns",
+      "generated": null,
+      "name": "allowed_folders",
+      "notNull": false,
+      "onUpdateNow": false,
+      "onUpdateNowFsp": null,
+      "table": "preset",
+      "type": "json"
+    },
+    {
+      "autoIncrement": false,
+      "charSet": null,
+      "collation": null,
+      "default": null,
+      "entityType": "columns",
+      "generated": null,
+      "name": "auto_update",
+      "notNull": false,
+      "onUpdateNow": false,
+      "onUpdateNowFsp": null,
+      "table": "preset",
+      "type": "boolean"
+    },
+    {
+      "autoIncrement": false,
+      "charSet": null,
+      "collation": null,
+      "default": null,
+      "entityType": "columns",
+      "generated": null,
+      "name": "capabilities",
+      "notNull": false,
+      "onUpdateNow": false,
+      "onUpdateNowFsp": null,
+      "table": "preset",
+      "type": "json"
+    },
+    {
+      "autoIncrement": false,
+      "charSet": null,
+      "collation": null,
+      "default": null,
+      "entityType": "columns",
+      "generated": null,
+      "name": "id",
+      "notNull": true,
+      "onUpdateNow": false,
+      "onUpdateNowFsp": null,
+      "table": "device",
+      "type": "varchar(30)"
+    },
+    {
+      "autoIncrement": false,
+      "charSet": null,
+      "collation": null,
+      "default": null,
+      "entityType": "columns",
+      "generated": null,
+      "name": "workspace_id",
+      "notNull": true,
+      "onUpdateNow": false,
+      "onUpdateNowFsp": null,
+      "table": "device",
+      "type": "varchar(30)"
+    },
+    {
+      "autoIncrement": false,
+      "charSet": null,
+      "collation": null,
+      "default": "(now())",
+      "entityType": "columns",
+      "generated": null,
+      "name": "time_created",
+      "notNull": true,
+      "onUpdateNow": false,
+      "onUpdateNowFsp": null,
+      "table": "device",
+      "type": "timestamp(3)"
+    },
+    {
+      "autoIncrement": false,
+      "charSet": null,
+      "collation": null,
+      "default": "(CURRENT_TIMESTAMP(3) ON UPDATE CURRENT_TIMESTAMP(3))",
+      "entityType": "columns",
+      "generated": null,
+      "name": "time_updated",
+      "notNull": true,
+      "onUpdateNow": false,
+      "onUpdateNowFsp": null,
+      "table": "device",
+      "type": "timestamp(3)"
+    },
+    {
+      "autoIncrement": false,
+      "charSet": null,
+      "collation": null,
+      "default": null,
+      "entityType": "columns",
+      "generated": null,
+      "name": "time_deleted",
+      "notNull": false,
+      "onUpdateNow": false,
+      "onUpdateNowFsp": null,
+      "table": "device",
+      "type": "timestamp(3)"
+    },
+    {
+      "autoIncrement": false,
+      "charSet": null,
+      "collation": null,
+      "default": null,
+      "entityType": "columns",
+      "generated": null,
+      "name": "device_id",
+      "notNull": true,
+      "onUpdateNow": false,
+      "onUpdateNowFsp": null,
+      "table": "device",
+      "type": "varchar(64)"
+    },
+    {
+      "autoIncrement": false,
+      "charSet": null,
+      "collation": null,
+      "default": null,
+      "entityType": "columns",
+      "generated": null,
+      "name": "user_id",
+      "notNull": true,
+      "onUpdateNow": false,
+      "onUpdateNowFsp": null,
+      "table": "device",
+      "type": "varchar(30)"
+    },
+    {
+      "autoIncrement": false,
+      "charSet": null,
+      "collation": null,
+      "default": "(now())",
+      "entityType": "columns",
+      "generated": null,
+      "name": "last_seen",
+      "notNull": true,
+      "onUpdateNow": false,
+      "onUpdateNowFsp": null,
+      "table": "device",
+      "type": "timestamp(3)"
+    },
+    {
+      "autoIncrement": false,
+      "charSet": null,
+      "collation": null,
+      "default": null,
+      "entityType": "columns",
+      "generated": null,
+      "name": "app_version",
+      "notNull": false,
+      "onUpdateNow": false,
+      "onUpdateNowFsp": null,
+      "table": "device",
+      "type": "varchar(32)"
+    },
+    {
+      "columns": [
+        "id"
+      ],
+      "entityType": "pks",
+      "name": "PRIMARY",
+      "table": "account"
+    },
+    {
+      "columns": [
+        "id"
+      ],
+      "entityType": "pks",
+      "name": "PRIMARY",
+      "table": "auth"
+    },
+    {
+      "columns": [
+        "id"
+      ],
+      "entityType": "pks",
+      "name": "PRIMARY",
+      "table": "benchmark"
+    },
+    {
+      "columns": [
+        "workspace_id",
+        "id"
+      ],
+      "entityType": "pks",
+      "name": "PRIMARY",
+      "table": "billing"
+    },
+    {
+      "columns": [
+        "email",
+        "type"
+      ],
+      "entityType": "pks",
+      "name": "PRIMARY",
+      "table": "coupon"
+    },
+    {
+      "columns": [
+        "workspace_id",
+        "id"
+      ],
+      "entityType": "pks",
+      "name": "PRIMARY",
+      "table": "lite"
+    },
+    {
+      "columns": [
+        "workspace_id",
+        "id"
+      ],
+      "entityType": "pks",
+      "name": "PRIMARY",
+      "table": "payment"
+    },
+    {
+      "columns": [
+        "workspace_id",
+        "id"
+      ],
+      "entityType": "pks",
+      "name": "PRIMARY",
+      "table": "subscription"
+    },
+    {
+      "columns": [
+        "workspace_id",
+        "id"
+      ],
+      "entityType": "pks",
+      "name": "PRIMARY",
+      "table": "usage"
+    },
+    {
+      "columns": [
+        "ip",
+        "interval"
+      ],
+      "entityType": "pks",
+      "name": "PRIMARY",
+      "table": "ip_rate_limit"
+    },
+    {
+      "columns": [
+        "ip"
+      ],
+      "entityType": "pks",
+      "name": "PRIMARY",
+      "table": "ip"
+    },
+    {
+      "columns": [
+        "key",
+        "interval"
+      ],
+      "entityType": "pks",
+      "name": "PRIMARY",
+      "table": "key_rate_limit"
+    },
+    {
+      "columns": [
+        "id"
+      ],
+      "entityType": "pks",
+      "name": "PRIMARY",
+      "table": "model_sticky_provider"
+    },
+    {
+      "columns": [
+        "id",
+        "interval"
+      ],
+      "entityType": "pks",
+      "name": "PRIMARY",
+      "table": "model_tpm_rate_limit"
+    },
+    {
+      "columns": [
+        "id",
+        "interval"
+      ],
+      "entityType": "pks",
+      "name": "PRIMARY",
+      "table": "model_tps_rate_limit"
+    },
+    {
+      "columns": [
+        "workspace_id",
+        "id"
+      ],
+      "entityType": "pks",
+      "name": "PRIMARY",
+      "table": "key"
+    },
+    {
+      "columns": [
+        "workspace_id",
+        "id"
+      ],
+      "entityType": "pks",
+      "name": "PRIMARY",
+      "table": "model"
+    },
+    {
+      "columns": [
+        "workspace_id",
+        "id"
+      ],
+      "entityType": "pks",
+      "name": "PRIMARY",
+      "table": "provider"
+    },
+    {
+      "columns": [
+        "workspace_id"
+      ],
+      "entityType": "pks",
+      "name": "PRIMARY",
+      "table": "referral_code"
+    },
+    {
+      "columns": [
+        "workspace_id",
+        "referral_id"
+      ],
+      "entityType": "pks",
+      "name": "PRIMARY",
+      "table": "referral_reward"
+    },
+    {
+      "columns": [
+        "workspace_id",
+        "id"
+      ],
+      "entityType": "pks",
+      "name": "PRIMARY",
+      "table": "referral"
+    },
+    {
+      "columns": [
+        "workspace_id",
+        "id"
+      ],
+      "entityType": "pks",
+      "name": "PRIMARY",
+      "table": "user"
+    },
+    {
+      "columns": [
+        "id"
+      ],
+      "entityType": "pks",
+      "name": "PRIMARY",
+      "table": "workspace"
+    },
+    {
+      "columns": [
+        "workspace_id",
+        "id"
+      ],
+      "entityType": "pks",
+      "name": "PRIMARY",
+      "table": "preset"
+    },
+    {
+      "columns": [
+        "workspace_id",
+        "id"
+      ],
+      "entityType": "pks",
+      "name": "PRIMARY",
+      "table": "device"
+    },
+    {
+      "algorithm": null,
+      "columns": [
+        {
+          "isExpression": false,
+          "value": "provider"
+        },
+        {
+          "isExpression": false,
+          "value": "subject"
+        }
+      ],
+      "entityType": "indexes",
+      "isUnique": true,
+      "lock": null,
+      "name": "provider",
+      "nameExplicit": true,
+      "table": "auth",
+      "using": null
+    },
+    {
+      "algorithm": null,
+      "columns": [
+        {
+          "isExpression": false,
+          "value": "account_id"
+        }
+      ],
+      "entityType": "indexes",
+      "isUnique": false,
+      "lock": null,
+      "name": "account_id",
+      "nameExplicit": true,
+      "table": "auth",
+      "using": null
+    },
+    {
+      "algorithm": null,
+      "columns": [
+        {
+          "isExpression": false,
+          "value": "time_created"
+        }
+      ],
+      "entityType": "indexes",
+      "isUnique": false,
+      "lock": null,
+      "name": "time_created",
+      "nameExplicit": true,
+      "table": "benchmark",
+      "using": null
+    },
+    {
+      "algorithm": null,
+      "columns": [
+        {
+          "isExpression": false,
+          "value": "customer_id"
+        }
+      ],
+      "entityType": "indexes",
+      "isUnique": true,
+      "lock": null,
+      "name": "global_customer_id",
+      "nameExplicit": true,
+      "table": "billing",
+      "using": null
+    },
+    {
+      "algorithm": null,
+      "columns": [
+        {
+          "isExpression": false,
+          "value": "subscription_id"
+        }
+      ],
+      "entityType": "indexes",
+      "isUnique": true,
+      "lock": null,
+      "name": "global_subscription_id",
+      "nameExplicit": true,
+      "table": "billing",
+      "using": null
+    },
+    {
+      "algorithm": null,
+      "columns": [
+        {
+          "isExpression": false,
+          "value": "lite_subscription_id"
+        }
+      ],
+      "entityType": "indexes",
+      "isUnique": true,
+      "lock": null,
+      "name": "global_lite_subscription_id",
+      "nameExplicit": true,
+      "table": "billing",
+      "using": null
+    },
+    {
+      "algorithm": null,
+      "columns": [
+        {
+          "isExpression": false,
+          "value": "workspace_id"
+        },
+        {
+          "isExpression": false,
+          "value": "user_id"
+        }
+      ],
+      "entityType": "indexes",
+      "isUnique": true,
+      "lock": null,
+      "name": "workspace_user_id",
+      "nameExplicit": true,
+      "table": "lite",
+      "using": null
+    },
+    {
+      "algorithm": null,
+      "columns": [
+        {
+          "isExpression": false,
+          "value": "workspace_id"
+        },
+        {
+          "isExpression": false,
+          "value": "user_id"
+        }
+      ],
+      "entityType": "indexes",
+      "isUnique": true,
+      "lock": null,
+      "name": "workspace_user_id",
+      "nameExplicit": true,
+      "table": "subscription",
+      "using": null
+    },
+    {
+      "algorithm": null,
+      "columns": [
+        {
+          "isExpression": false,
+          "value": "workspace_id"
+        },
+        {
+          "isExpression": false,
+          "value": "time_created"
+        }
+      ],
+      "entityType": "indexes",
+      "isUnique": false,
+      "lock": null,
+      "name": "usage_time_created",
+      "nameExplicit": true,
+      "table": "usage",
+      "using": null
+    },
+    {
+      "algorithm": null,
+      "columns": [
+        {
+          "isExpression": false,
+          "value": "key"
+        }
+      ],
+      "entityType": "indexes",
+      "isUnique": true,
+      "lock": null,
+      "name": "global_key",
+      "nameExplicit": true,
+      "table": "key",
+      "using": null
+    },
+    {
+      "algorithm": null,
+      "columns": [
+        {
+          "isExpression": false,
+          "value": "workspace_id"
+        },
+        {
+          "isExpression": false,
+          "value": "model"
+        }
+      ],
+      "entityType": "indexes",
+      "isUnique": true,
+      "lock": null,
+      "name": "model_workspace_model",
+      "nameExplicit": true,
+      "table": "model",
+      "using": null
+    },
+    {
+      "algorithm": null,
+      "columns": [
+        {
+          "isExpression": false,
+          "value": "workspace_id"
+        },
+        {
+          "isExpression": false,
+          "value": "provider"
+        }
+      ],
+      "entityType": "indexes",
+      "isUnique": true,
+      "lock": null,
+      "name": "workspace_provider",
+      "nameExplicit": true,
+      "table": "provider",
+      "using": null
+    },
+    {
+      "algorithm": null,
+      "columns": [
+        {
+          "isExpression": false,
+          "value": "code"
+        }
+      ],
+      "entityType": "indexes",
+      "isUnique": true,
+      "lock": null,
+      "name": "code",
+      "nameExplicit": true,
+      "table": "referral_code",
+      "using": null
+    },
+    {
+      "algorithm": null,
+      "columns": [
+        {
+          "isExpression": false,
+          "value": "referral_id"
+        }
+      ],
+      "entityType": "indexes",
+      "isUnique": false,
+      "lock": null,
+      "name": "referral_id",
+      "nameExplicit": true,
+      "table": "referral_reward",
+      "using": null
+    },
+    {
+      "algorithm": null,
+      "columns": [
+        {
+          "isExpression": false,
+          "value": "invitee_account_id"
+        }
+      ],
+      "entityType": "indexes",
+      "isUnique": true,
+      "lock": null,
+      "name": "invitee_account_id",
+      "nameExplicit": true,
+      "table": "referral",
+      "using": null
+    },
+    {
+      "algorithm": null,
+      "columns": [
+        {
+          "isExpression": false,
+          "value": "workspace_id"
+        },
+        {
+          "isExpression": false,
+          "value": "account_id"
+        }
+      ],
+      "entityType": "indexes",
+      "isUnique": true,
+      "lock": null,
+      "name": "user_account_id",
+      "nameExplicit": true,
+      "table": "user",
+      "using": null
+    },
+    {
+      "algorithm": null,
+      "columns": [
+        {
+          "isExpression": false,
+          "value": "workspace_id"
+        },
+        {
+          "isExpression": false,
+          "value": "email"
+        }
+      ],
+      "entityType": "indexes",
+      "isUnique": true,
+      "lock": null,
+      "name": "user_email",
+      "nameExplicit": true,
+      "table": "user",
+      "using": null
+    },
+    {
+      "algorithm": null,
+      "columns": [
+        {
+          "isExpression": false,
+          "value": "account_id"
+        }
+      ],
+      "entityType": "indexes",
+      "isUnique": false,
+      "lock": null,
+      "name": "global_account_id",
+      "nameExplicit": true,
+      "table": "user",
+      "using": null
+    },
+    {
+      "algorithm": null,
+      "columns": [
+        {
+          "isExpression": false,
+          "value": "email"
+        }
+      ],
+      "entityType": "indexes",
+      "isUnique": false,
+      "lock": null,
+      "name": "global_email",
+      "nameExplicit": true,
+      "table": "user",
+      "using": null
+    },
+    {
+      "algorithm": null,
+      "columns": [
+        {
+          "isExpression": false,
+          "value": "slug"
+        }
+      ],
+      "entityType": "indexes",
+      "isUnique": true,
+      "lock": null,
+      "name": "slug",
+      "nameExplicit": true,
+      "table": "workspace",
+      "using": null
+    },
+    {
+      "algorithm": null,
+      "columns": [
+        {
+          "isExpression": false,
+          "value": "workspace_id"
+        }
+      ],
+      "entityType": "indexes",
+      "isUnique": true,
+      "lock": null,
+      "name": "preset_workspace",
+      "nameExplicit": true,
+      "table": "preset",
+      "using": null
+    },
+    {
+      "algorithm": null,
+      "columns": [
+        {
+          "isExpression": false,
+          "value": "workspace_id"
+        },
+        {
+          "isExpression": false,
+          "value": "device_id"
+        }
+      ],
+      "entityType": "indexes",
+      "isUnique": true,
+      "lock": null,
+      "name": "device_workspace_device",
+      "nameExplicit": true,
+      "table": "device",
+      "using": null
+    }
+  ],
+  "dialect": "mysql",
+  "id": "8ad2e6b5-c5ad-485b-b4da-00f6245174ea",
+  "prevIds": [
+    "3e952a24-4137-4944-b7fa-e39e71061235"
+  ],
+  "renames": [],
+  "version": "6"
+}

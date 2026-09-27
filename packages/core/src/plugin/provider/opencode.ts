@@ -98,13 +98,20 @@ export const OpencodePlugin = define<HttpClient.HttpClient | EventV2.Service | S
         ? yield* ctx.integration.connection.resolve(connection).pipe(Effect.catch(() => Effect.succeed(undefined)))
         : undefined
       connected = connection !== undefined
-      providers = credential
-        ? yield* fetchProviders(http, credential).pipe(
+      const remote = credential
+        ? yield* fetchRemote(http, credential).pipe(
             Effect.catch((cause) =>
               Effect.logWarning("failed to load OpenCode provider config", { cause }).pipe(Effect.as(undefined)),
             ),
           )
         : undefined
+      providers = remote?.providers
+      // ponytail: undefined allowlist means open; refresh re-applies so disconnects reopen.
+      yield* ctx.skill.transform(
+        Effect.fn("OpencodePlugin.skills")(function* (draft) {
+          draft.allowlist(remote?.skillsAllowlist)
+        }),
+      )
     })
 
     yield* ctx.integration.transform((draft) => {
@@ -196,7 +203,7 @@ export const OpencodePlugin = define<HttpClient.HttpClient | EventV2.Service | S
   }),
 })
 
-function fetchProviders(http: HttpClient.HttpClient, value: CredentialValue) {
+function fetchRemote(http: HttpClient.HttpClient, value: CredentialValue) {
   const metadata = value.metadata
   const server = typeof metadata?.server === "string" ? metadata.server : defaultServer
   const orgID = typeof metadata?.orgID === "string" ? metadata.orgID : undefined
@@ -214,7 +221,10 @@ function fetchProviders(http: HttpClient.HttpClient, value: CredentialValue) {
         if (response.status === 404) return Effect.succeed(undefined)
         return HttpClientResponse.filterStatusOk(response).pipe(
           Effect.flatMap(HttpClientResponse.schemaBodyJson(RemoteResponse)),
-          Effect.map((remote) => remote.config.provider),
+          Effect.map((remote) => ({
+            providers: remote.config.provider,
+            skillsAllowlist: remote.config.skills?.allowlist,
+          })),
         )
       }),
     )

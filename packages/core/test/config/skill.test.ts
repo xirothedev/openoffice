@@ -25,6 +25,7 @@ describe("ConfigSkillPlugin.Plugin", () => {
             sources.push(source)
           },
           list: () => sources,
+          allowlist: () => {},
         })
         if (Effect.isEffect(result)) yield* result
         const dispose = Effect.sync(() => {
